@@ -8,9 +8,12 @@ namespace MysteryOfTheDungeon
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
+
         SpriteBatch spriteBatch;
-        Texture2D texture;
+        private Map MapConstructor;
+        private SpriteMap[,] Map;
         private Player SpritePlayer;
+        private Bonfire SpriteBonfire;
 
         public Game1()
         {
@@ -20,12 +23,19 @@ namespace MysteryOfTheDungeon
 
         protected override void Initialize()
         {
+            graphics.PreferredBackBufferWidth = 30 * 27 + 400;
+            graphics.PreferredBackBufferHeight = 30 * 26;
+            graphics.IsFullScreen = false;
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBonfire = new Bonfire(new Animations(Content.Load<Texture2D>("MapTexture/Burn"), 4));
+            MapConstructor = new Map(Content.Load<Texture2D>("MapTexture/topOfWall"), Content.Load<Texture2D>("MapTexture/floor"), Content.Load<Texture2D>("MapTexture/frontOfWall"));
+            Map = MapConstructor.GenerateMap();
             SpritePlayer = new Player(new Dictionary<string, Animations>()
             {
                 { "GoRight", new Animations(Content.Load<Texture2D>("Player/GoRight"), 3) },
@@ -33,9 +43,10 @@ namespace MysteryOfTheDungeon
                 { "GoUp", new Animations(Content.Load<Texture2D>("Player/GoUp"), 3) },
                 { "GoDown", new Animations(Content.Load<Texture2D>("Player/GoDown"), 3) } })
             {
-                PositionValue = new Vector2(0, 0),
+                PositionValue = new Vector2(60, 60),
                 Speed = 2f
             };
+            
 
         }
 
@@ -49,8 +60,8 @@ namespace MysteryOfTheDungeon
             KeyboardState keyboardState = Keyboard.GetState();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.Escape))
                 Exit();
-
-            SpritePlayer.Update(gameTime);
+            SpriteBonfire.Update(gameTime);
+            SpritePlayer.Update(gameTime, Map);
             base.Update(gameTime);
         }
 
@@ -59,9 +70,9 @@ namespace MysteryOfTheDungeon
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
-
+            MapConstructor.Draw(spriteBatch, Map);
+            SpriteBonfire.Draw(spriteBatch);
             SpritePlayer.Draw(spriteBatch);
-
             spriteBatch.End();
             base.Draw(gameTime);
         }

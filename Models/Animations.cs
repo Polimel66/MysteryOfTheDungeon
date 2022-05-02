@@ -11,16 +11,16 @@ namespace MysteryOfTheDungeon
 {
     public class Animations
     {
-        public Texture2D PlayerTexture { get; private set; }
+        public Texture2D Texture { get; private set; }
         public int CurrentFrame { get; set; }
         public int FrameCount { get; private set; }
-        public int FrameHeight { get { return PlayerTexture.Height; } }
-        public int FrameWidth { get { return PlayerTexture.Width / FrameCount; } }
+        public int FrameHeight { get { return Texture.Height; } }
+        public int FrameWidth { get { return Texture.Width / FrameCount; } }
         public float FrameSpeed { get; set; }
         public bool isLooping { get; set; }
         public Animations(Texture2D texture, int frameCount)
         {
-            PlayerTexture = texture;
+            Texture = texture;
             FrameCount = frameCount;
             isLooping = true;
             FrameSpeed = 0.2f;

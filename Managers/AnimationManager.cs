@@ -50,7 +50,7 @@ namespace MysteryOfTheDungeon
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Animation.PlayerTexture, Position, new Rectangle(Animation.FrameWidth * Animation.CurrentFrame, 0, Animation.FrameWidth, Animation.FrameHeight), Color.White);
+            spriteBatch.Draw(Animation.Texture, Position, new Rectangle(Animation.FrameWidth * Animation.CurrentFrame, 0, Animation.FrameWidth, Animation.FrameHeight), Color.White);
         }
     }
 }
