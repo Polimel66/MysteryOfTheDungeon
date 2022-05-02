@@ -23,7 +23,7 @@ namespace MysteryOfTheDungeon
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = 30 * 27 + 400;
+            graphics.PreferredBackBufferWidth = 30 * 27 + 300;
             graphics.PreferredBackBufferHeight = 30 * 26;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
