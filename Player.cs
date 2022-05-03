@@ -18,11 +18,11 @@ namespace MysteryOfTheDungeon
         protected int TextureHight = 31;
         protected int TextureWidth = 20;
         public Vector2 PositionValue;
-        public Vector2 Position 
-        { 
-            get { return PositionValue; } 
-            set { PositionValue = value; if (AnimationManager != null) AnimationManager.Position = PositionValue; } 
-        }
+        //public Vector2 Position 
+        //{ 
+        //    get { return PositionValue; } 
+        //    set { PositionValue = value; if (AnimationManager != null) AnimationManager.Position = PositionValue; } 
+        //}
         public float Speed;
 
         //public Player(Texture2D texture)
@@ -34,6 +34,7 @@ namespace MysteryOfTheDungeon
         {
             AnimationsDictionary = animationsDictionary;
             AnimationManager = new AnimationManager(AnimationsDictionary.First().Value);
+            AnimationManager.Position = PositionValue;
         }
 
         #region Move
@@ -131,12 +132,13 @@ namespace MysteryOfTheDungeon
             Move(Map);
             
             AnimationManager.Update(gameTime);
-            Position = PositionValue;
+            AnimationManager.Position = PositionValue;
+            //Position = PositionValue;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (AnimationManager != null)
+            //if (AnimationManager != null)
                 AnimationManager.Draw(spriteBatch);
         }
     }

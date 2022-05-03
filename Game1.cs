@@ -69,7 +69,7 @@ namespace MysteryOfTheDungeon
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             MapConstructor.Draw(spriteBatch, Map);
             SpriteBonfire.Draw(spriteBatch);
             SpritePlayer.Draw(spriteBatch);

@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bonfire.cs" />
     <Compile Include="SpriteMap.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Models\Animations.cs" />

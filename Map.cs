@@ -114,7 +114,7 @@ namespace MysteryOfTheDungeon
         }
     }
 
-    class Bonfire
+    /*class Bonfire
     {
         protected AnimationManager AnimationManager;
         protected Animations Animation;
@@ -147,5 +147,5 @@ namespace MysteryOfTheDungeon
             if (AnimationManager != null)
                 AnimationManager.Draw(spriteBatch);
         }
-    }
+    }*/
 }
