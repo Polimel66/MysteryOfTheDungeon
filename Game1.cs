@@ -34,7 +34,12 @@ namespace MysteryOfTheDungeon
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SpriteBonfire = new Bonfire(new Animations(Content.Load<Texture2D>("MapTexture/Burn"), 4));
-            MapConstructor = new Map(Content.Load<Texture2D>("MapTexture/topOfWall"), Content.Load<Texture2D>("MapTexture/floor"), Content.Load<Texture2D>("MapTexture/frontOfWall"));
+            MapConstructor = new Map(Content.Load<Texture2D>("MapTexture/TopOfWall"), Content.Load<Texture2D>("MapTexture/Floor"),
+                Content.Load<Texture2D>("MapTexture/FrontOfWall"), Content.Load<Texture2D>("MapTexture/Bonfire"),
+                Content.Load<Texture2D>("MapTexture/Pedestal"), Content.Load<Texture2D>("MapTexture/BedsideTable"),
+                Content.Load<Texture2D>("MapTexture/TableWithBook"), Content.Load<Texture2D>("MapTexture/BedTop"),
+                Content.Load<Texture2D>("MapTexture/BedBottom"), Content.Load<Texture2D>("MapTexture/Dummy"),
+                Content.Load<Texture2D>("MapTexture/Vase"));
             Map = MapConstructor.GenerateMap();
             SpritePlayer = new Player(new Dictionary<string, Animations>()
             {

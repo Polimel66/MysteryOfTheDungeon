@@ -12,7 +12,6 @@ namespace MysteryOfTheDungeon
     {
         protected AnimationManager AnimationManager;
         protected Animations Animation;
-        public bool fire = true;
 
         public Bonfire(Animations animation)
         {
@@ -25,19 +24,12 @@ namespace MysteryOfTheDungeon
 
         public void Update(GameTime gameTime)
         {
-            if(fire)
-            {
             AnimationManager.Play(Animation);
-                fire = false;
-            }
-
             AnimationManager.Update(gameTime);
-            //AnimationManager.Position = new Vector2(210, 570);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //if (AnimationManager != null)
                 AnimationManager.Draw(spriteBatch);
         }
     }

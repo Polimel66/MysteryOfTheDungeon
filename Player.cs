@@ -7,28 +7,18 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-//test1
 namespace MysteryOfTheDungeon
 {
     class Player
     {
         protected AnimationManager AnimationManager;
         protected Dictionary<string, Animations> AnimationsDictionary;
-        //protected Texture2D Texture;
         protected int TextureHight = 31;
         protected int TextureWidth = 20;
         public Vector2 PositionValue;
-        //public Vector2 Position 
-        //{ 
-        //    get { return PositionValue; } 
-        //    set { PositionValue = value; if (AnimationManager != null) AnimationManager.Position = PositionValue; } 
-        //}
         public float Speed;
-
-        //public Player(Texture2D texture)
-        //{
-        //    Texture = texture;
-        //}
+        protected List<CellType> CollisionTextures = new List<CellType>() { CellType.Bonfire, CellType.WallFront, CellType.WallTop,
+            CellType.Pedestal, CellType.BedsideTable, CellType.TableWithBook, CellType.BedTop, CellType.BedBottom, CellType.Dummy, CellType.Vase };
 
         public Player(Dictionary<string, Animations> animationsDictionary)
         {
@@ -100,7 +90,7 @@ namespace MysteryOfTheDungeon
             var playerX = PositionValue.X + dx;
             var playerY = PositionValue.Y + TextureHight;
             return playerX <= spriteMap.Position.X + mapTextureSide && playerX >= spriteMap.Position.X && playerY
-                >= spriteMap.Position.Y && playerY <= spriteMap.Position.Y + mapTextureSide && (spriteMap.Value == CellType.WallTop || spriteMap.Value == CellType.WallFront);
+                >= spriteMap.Position.Y && playerY <= spriteMap.Position.Y + mapTextureSide && CollisionTextures.Contains(spriteMap.Value);
         }
 
         protected bool IsTouchingRight(SpriteMap spriteMap, float dx)
@@ -110,7 +100,7 @@ namespace MysteryOfTheDungeon
             var playerX = PositionValue.X + TextureWidth + dx;
             var playerY = PositionValue.Y + TextureHight;
             return playerX >= spriteMap.Position.X && playerX <= spriteMap.Position.X + mapTextureSide && playerY
-                >= spriteMap.Position.Y && playerY <= spriteMap.Position.Y + mapTextureSide && (spriteMap.Value == CellType.WallTop || spriteMap.Value == CellType.WallFront);
+                >= spriteMap.Position.Y && playerY <= spriteMap.Position.Y + mapTextureSide && CollisionTextures.Contains(spriteMap.Value);
         }
 
         protected bool IsTouchingTopOrBottom(SpriteMap spriteMap, float dy)
@@ -122,7 +112,7 @@ namespace MysteryOfTheDungeon
             var playerY = PositionValue.Y + TextureHight + dy;
             return ((playerLeftX > spriteMap.Position.X && playerLeftX < spriteMap.Position.X + mapTextureSide) ||
                 (playerRightX > spriteMap.Position.X && playerRightX < spriteMap.Position.X + mapTextureSide)) &&
-                playerY >= spriteMap.Position.Y && playerY <= spriteMap.Position.Y + mapTextureSide && (spriteMap.Value == CellType.WallTop || spriteMap.Value == CellType.WallFront);
+                playerY >= spriteMap.Position.Y && playerY <= spriteMap.Position.Y + mapTextureSide && CollisionTextures.Contains(spriteMap.Value);
         }
 
         #endregion
@@ -133,12 +123,10 @@ namespace MysteryOfTheDungeon
             
             AnimationManager.Update(gameTime);
             AnimationManager.Position = PositionValue;
-            //Position = PositionValue;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //if (AnimationManager != null)
                 AnimationManager.Draw(spriteBatch);
         }
     }
