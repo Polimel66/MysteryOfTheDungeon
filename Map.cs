@@ -21,7 +21,21 @@ namespace MysteryOfTheDungeon
         BedTop = 7,
         BedBottom = 8,
         Dummy = 9,
-        Vase = 'v'// = 'v'
+        Vase = 'v',// = 'v'
+        ClosedChest = 'c',
+        Bake = 'b',
+        KitchenTable = 'k',
+        Sink = 's',
+        Tabletop = 't',
+        Chair = 'C',
+        DinnerTable = 'd',
+        BrokenVase = 'B',
+        Shovel = 'S',
+        Basket = 'K',
+        Ambry = 'a',
+        BookTable = 'T',
+        GoldenKey = 'G',
+        Grit = 'g'
     }
 
     class Map
@@ -37,11 +51,29 @@ namespace MysteryOfTheDungeon
         private Texture2D BedBottomTexture;
         private Texture2D DummyTexture;
         private Texture2D VaseTexture;
+        private Texture2D BrokenVaseTexture;
+        private Texture2D ClosedChestTexture;
+        private Texture2D BakeTexture;
+        private Texture2D KitchenTableTexture;
+        private Texture2D SinkTexture;
+        private Texture2D TabletopTexture;
+        private Texture2D ChairTexture;
+        private Texture2D DinnerTableTexture;
+        private Texture2D ShovelTexture;
+        private Texture2D BasketTexture;
+        private Texture2D AmbryTexture;
+        private Texture2D BookTableTexture;
+        private Texture2D GoldenKeyTexture;
+        private Texture2D GritTexture;
+
         protected int MapTextureSide = 30;
 
         public Map(Texture2D wallTopTexture, Texture2D floorTexture, Texture2D wallFrontTexture, Texture2D bonfireTexture,
             Texture2D pedestalTexture, Texture2D bedsideTableTexture, Texture2D tableWithBookTexture, Texture2D bedTopTexture,
-            Texture2D bedBottomTexture, Texture2D dummyTexture, Texture2D vaseTexture)
+            Texture2D bedBottomTexture, Texture2D dummyTexture, Texture2D vaseTexture, Texture2D closedChestTexture, Texture2D bakeTexture,
+            Texture2D kitchenTableTexture, Texture2D sinkTexture, Texture2D tabletopTexture, Texture2D chairTexture, Texture2D dinnerTableTexture,
+            Texture2D brokenvaseTexture, Texture2D shovelTexture, Texture2D basketTexture, Texture2D ambryTexture, Texture2D bookTableTexture,
+            Texture2D goldenKeyTexture, Texture2D gritTexture)
         {
             WallTopTexture = wallTopTexture;
             FloorTexture = floorTexture;
@@ -54,19 +86,33 @@ namespace MysteryOfTheDungeon
             BedBottomTexture = bedBottomTexture;
             DummyTexture = dummyTexture;
             VaseTexture = vaseTexture;
+            BrokenVaseTexture = brokenvaseTexture;
+            ClosedChestTexture = closedChestTexture;
+            BakeTexture = bakeTexture;
+            KitchenTableTexture = kitchenTableTexture;
+            SinkTexture = sinkTexture;
+            TabletopTexture = tabletopTexture;
+            ChairTexture = chairTexture;
+            DinnerTableTexture = dinnerTableTexture;
+            ShovelTexture = shovelTexture;
+            BasketTexture = basketTexture;
+            AmbryTexture = ambryTexture;
+            BookTableTexture = bookTableTexture;
+            GoldenKeyTexture = goldenKeyTexture;
+            GritTexture = gritTexture;
         }
         
         private readonly List<string> MapConstructor = new List<string>
         {
             "0222222200000000222222222220",
-            "0115751900000000111111111110",
+            "0115751900000000aa111K555c10",
             "0111811122222222111111111110",
-            "0111111111111111111111111110",
-            "0161111101001000111111111110",
-            "011111v101001000111111111110",
-            "0000000001001000111111111110",
-            "0020022221221000111111111110",
-            "0012211111111000111111111110",
+            "011111111111111111111111T110",
+            "01611111010010001111111111B0",
+            "011111v1010010001111111111b0",
+            "0000000001001000111CCCCC11s0",
+            "0020022221221000111ddddd11t0",
+            "00G2211111111000S111111111k0",
             "0011110000001000000000000000",
             "0000012200001000022202220200",
             "0022011102221222011101112100",
@@ -77,12 +123,12 @@ namespace MysteryOfTheDungeon
             "0011000001114111000000010000",
             "0000000001111111022222212220",
             "0222222201111111011111111110",
-            "0111111100010000011111111110",
-            "0111111100210000011111111110",
-            "0111111122110000011111111110",
-            "0111111111110000011111111110",
-            "0111111100110000011111111110",
-            "0111111100010000011111111110",
+            "0ggggggg00010000011111111110",
+            "0ggggggg00210000011111111110",
+            "0ggggggg22110000011111111110",
+            "0ggggggg11110000011111111110",
+            "0ggggggg00110000011111111110",
+            "0ggggggg00010000011111111110",
             "0000000000000000000000000000"
         };
 
@@ -101,7 +147,7 @@ namespace MysteryOfTheDungeon
                     var mapCell = MapConstructor.ElementAt(y)[x];
                     if ("0123456789".Contains(mapCell))
                     {
-                        var mapCellValue = int.Parse(mapCell.ToString();
+                        var mapCellValue = int.Parse(mapCell.ToString());
                         if (mapCellValue == 0)
                         {
                             texture = WallTopTexture;
@@ -153,11 +199,82 @@ namespace MysteryOfTheDungeon
                             cellType = CellType.Dummy;
                         }
                     }
-                    else //if (mapCell.Equals('v'))
+                    else if (mapCell.Equals('v'))
                     {
                         texture = VaseTexture;
                         cellType = CellType.Vase;
                     }
+                    else if(mapCell.Equals('b'))
+                    {
+                        texture = BakeTexture;
+                        cellType = CellType.Bake;
+                    }
+                    else if (mapCell.Equals('k'))
+                    {
+                        texture = KitchenTableTexture;
+                        cellType = CellType.KitchenTable;
+                    }
+                    else if (mapCell.Equals('t'))
+                    {
+                        texture = TabletopTexture;
+                        cellType = CellType.Tabletop;
+                    }
+                    else if (mapCell.Equals('c'))
+                    {
+                        texture = ClosedChestTexture;
+                        cellType = CellType.ClosedChest;
+                    }
+                    else if (mapCell.Equals('C'))
+                    {
+                        texture = ChairTexture;
+                        cellType = CellType.Chair;
+                    }
+                    else if (mapCell.Equals('d'))
+                    {
+                        texture = DinnerTableTexture;
+                        cellType = CellType.DinnerTable;
+                    }
+                    else if (mapCell.Equals('B'))
+                    {
+                        texture = BrokenVaseTexture;
+                        cellType = CellType.BrokenVase;
+                    }
+                    else if (mapCell.Equals('S'))
+                    {
+                        texture = ShovelTexture;
+                        cellType = CellType.Shovel;
+                    }
+                    else if (mapCell.Equals('K'))
+                    {
+                        texture = BasketTexture;
+                        cellType = CellType.Basket;
+                    }
+                    else if (mapCell.Equals('a'))
+                    {
+                        texture = AmbryTexture;
+                        cellType = CellType.Ambry;
+                    }
+                    else if (mapCell.Equals('T'))
+                    {
+                        texture = BookTableTexture;
+                        cellType = CellType.BookTable;
+                    }
+                    else if (mapCell.Equals('G'))
+                    {
+                        texture = GoldenKeyTexture;
+                        cellType = CellType.GoldenKey;
+                    }
+                    else if (mapCell.Equals('g'))
+                    {
+                        texture = GritTexture;
+                        cellType = CellType.Grit;
+                    }
+                    else
+                    {
+                        texture = SinkTexture;
+                        cellType = CellType.Sink;
+                    }
+
                     resultMap[x, y] = new SpriteMap(texture, position, cellType);
                     position.X += MapTextureSide;
                 }
@@ -177,32 +294,4 @@ namespace MysteryOfTheDungeon
             }
         }
     }
-
-    /*class Bonfire
-    {
-        protected AnimationManager AnimationManager;
-        protected Animations Animation;
-
-        public Bonfire(Animations animation)
-        {
-            Animation = animation;
-            AnimationManager = new AnimationManager(Animation)
-            {
-                Position = new Vector2(360, 450)
-
-            };
-        }
-
-        public void Update(GameTime gameTime)
-        {
-
-            AnimationManager.Play(Animation);  
-            AnimationManager.Update(gameTime);
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            AnimationManager.Draw(spriteBatch);
-        }
-    }*/
 }

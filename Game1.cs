@@ -14,6 +14,7 @@ namespace MysteryOfTheDungeon
         private SpriteMap[,] Map;
         private Player SpritePlayer;
         private Bonfire SpriteBonfire;
+        private Inventory SpriteInventory;
 
         public Game1()
         {
@@ -23,7 +24,7 @@ namespace MysteryOfTheDungeon
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = 30 * 27 + 400;
+            graphics.PreferredBackBufferWidth = 30 * 27 + 30 + 407;
             graphics.PreferredBackBufferHeight = 30 * 26;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
@@ -39,7 +40,14 @@ namespace MysteryOfTheDungeon
                 Content.Load<Texture2D>("MapTexture/Pedestal"), Content.Load<Texture2D>("MapTexture/BedsideTable"),
                 Content.Load<Texture2D>("MapTexture/TableWithBook"), Content.Load<Texture2D>("MapTexture/BedTop"),
                 Content.Load<Texture2D>("MapTexture/BedBottom"), Content.Load<Texture2D>("MapTexture/Dummy"),
-                Content.Load<Texture2D>("MapTexture/Vase"));
+                Content.Load<Texture2D>("MapTexture/Vase"), Content.Load<Texture2D>("MapTexture/ClosedChest"),
+                Content.Load<Texture2D>("MapTexture/Bake"), Content.Load<Texture2D>("MapTexture/KitchenTable"),
+                Content.Load<Texture2D>("MapTexture/Sink"), Content.Load<Texture2D>("MapTexture/Tabletop"),
+                Content.Load<Texture2D>("MapTexture/Chair"), Content.Load<Texture2D>("MapTexture/DinnerTable"),
+                Content.Load<Texture2D>("MapTexture/BrokenVase"), Content.Load<Texture2D>("MapTexture/Shovel"),
+                Content.Load<Texture2D>("MapTexture/Basket"), Content.Load<Texture2D>("MapTexture/Ambry"),
+                Content.Load<Texture2D>("MapTexture/BookTable"), Content.Load<Texture2D>("MapTexture/GoldenKey"),
+                Content.Load<Texture2D>("MapTexture/Grit"));
             Map = MapConstructor.GenerateMap();
             SpritePlayer = new Player(new Dictionary<string, Animations>()
             {
@@ -51,7 +59,9 @@ namespace MysteryOfTheDungeon
                 PositionValue = new Vector2(60, 60),
                 Speed = 2f
             };
-            
+            SpriteInventory = new Inventory(Content.Load<Texture2D>("Inventory/Inventory"));
+
+
 
         }
 
@@ -76,6 +86,7 @@ namespace MysteryOfTheDungeon
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             MapConstructor.Draw(spriteBatch, Map);
+            SpriteInventory.Draw(spriteBatch);
             SpriteBonfire.Draw(spriteBatch);
             SpritePlayer.Draw(spriteBatch);
             spriteBatch.End();
