@@ -14,12 +14,17 @@ namespace MysteryOfTheDungeon
         public readonly Texture2D Texture;
         public CellType Value;
         public Vector2 Position;
-        public Rectangle Rectangle;
         public SpriteMap(Texture2D texture, Vector2 position, CellType value)
         {
             Texture = texture;
             Position = position;
             Value = value;
+        }
+
+        public SpriteMap(Texture2D texture, Vector2 position)
+        {
+            Texture = texture;
+            Position = position;
         }
     }
 }

@@ -66,7 +66,7 @@ namespace MysteryOfTheDungeon
         private Texture2D GoldenKeyTexture;
         private Texture2D GritTexture;
 
-        protected int MapTextureSide = 30;
+        protected readonly int MapTextureSide = 30;
 
         public Map(Texture2D wallTopTexture, Texture2D floorTexture, Texture2D wallFrontTexture, Texture2D bonfireTexture,
             Texture2D pedestalTexture, Texture2D bedsideTableTexture, Texture2D tableWithBookTexture, Texture2D bedTopTexture,

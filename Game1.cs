@@ -12,6 +12,7 @@ namespace MysteryOfTheDungeon
         SpriteBatch spriteBatch;
         private Map MapConstructor;
         private SpriteMap[,] Map;
+        private SpriteMap[,] Inventory;
         private Player SpritePlayer;
         private Bonfire SpriteBonfire;
         private Inventory SpriteInventory;
@@ -59,8 +60,8 @@ namespace MysteryOfTheDungeon
                 PositionValue = new Vector2(60, 60),
                 Speed = 2f
             };
-            SpriteInventory = new Inventory(Content.Load<Texture2D>("Inventory/Inventory"));
-
+            SpriteInventory = new Inventory(Content.Load<Texture2D>("Inventory/Inventory"), Content.Load<Texture2D>("Inventory/EmptyCell"));
+            Inventory = SpriteInventory.GenerateInventory();
 
 
         }
@@ -86,7 +87,7 @@ namespace MysteryOfTheDungeon
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             MapConstructor.Draw(spriteBatch, Map);
-            SpriteInventory.Draw(spriteBatch);
+            SpriteInventory.Draw(spriteBatch, Inventory);
             SpriteBonfire.Draw(spriteBatch);
             SpritePlayer.Draw(spriteBatch);
             spriteBatch.End();
