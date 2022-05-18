@@ -12,31 +12,40 @@ namespace MysteryOfTheDungeon
     {
         Empty,
         MasterKey,
+        Hat,
         Dress,
         Shoes,
         Shovel,
         NailPuller,
         GoldenKey,
-        BlueKey
+        BlueKey,
+        FirstRelic
         // + 4 реликвии
     }
 
     class Inventory
     {
         private Texture2D BackgroundTexture;
+        private Texture2D BackgroundForTextTexture;
         private Vector2 PositionBackground = new Vector2(30 * 28, 0);
         public InventoryItems[] CurrentInventory;
         protected readonly int CellSize = 85;
         protected readonly int PaddingBetweenCells = 5;
         private Texture2D EmptyTexture;
+        private Texture2D MasterKeyTexture;
+        private Texture2D NailPullerTexture;
 
-        public Inventory(Texture2D inventoryTexture, Texture2D emptyTexture)
+        public Inventory(Texture2D inventoryTexture, Texture2D emptyTexture, Texture2D backgroundForTextTexture,
+            Texture2D masterKeyTexture, Texture2D nailPullerTexture)
         {
             BackgroundTexture = inventoryTexture;
+            BackgroundForTextTexture = backgroundForTextTexture;
             CurrentInventory = new InventoryItems[12];
             for(var i = 0; i < CurrentInventory.Length; i++)
                 CurrentInventory[i] = InventoryItems.Empty;
             EmptyTexture = emptyTexture;
+            MasterKeyTexture = masterKeyTexture;
+            NailPullerTexture = nailPullerTexture;
         }
 
         public SpriteMap[,] GenerateInventory()
@@ -54,6 +63,12 @@ namespace MysteryOfTheDungeon
                     case InventoryItems.Empty:
                         texture = EmptyTexture;
                         break;
+                    case InventoryItems.MasterKey:
+                        texture = MasterKeyTexture;
+                        break;
+                    case InventoryItems.NailPuller:
+                        texture = NailPullerTexture;
+                        break;
                     default:
                         texture = EmptyTexture;
                         break;
@@ -70,8 +85,7 @@ namespace MysteryOfTheDungeon
                 {
                     position.X += CellSize + PaddingBetweenCells;
                     columnCounter += 1;
-                }
-                    
+                }   
             }
             return resultInventory;
         }
@@ -80,13 +94,15 @@ namespace MysteryOfTheDungeon
         {
         }
 
-        public void Draw(SpriteBatch spriteBatch, SpriteMap[,] inventory)
+        public void Draw(SpriteBatch spriteBatch, SpriteFont spriteFont, SpriteMap[,] inventory, string outputText)
         {
             spriteBatch.Draw(BackgroundTexture, PositionBackground, Color.White);
+            spriteBatch.Draw(BackgroundForTextTexture, new Vector2(30 * 28 + 25, 60), Color.White);
             foreach (var inventoryCell in inventory)
             {
                 spriteBatch.Draw(inventoryCell.Texture, inventoryCell.Position, Color.White);
             }
+            spriteBatch.DrawString(spriteFont, outputText, new Vector2(915, 110), Color.White);
         }
     }
 }

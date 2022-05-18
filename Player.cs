@@ -11,6 +11,8 @@ namespace MysteryOfTheDungeon
 {
     class Player
     {
+        protected Interaction InteractionManager;
+        protected Inventory Inventory;
         protected AnimationManager AnimationManager;
         protected Dictionary<string, Animations> AnimationsDictionary;
         protected int TextureHight = 31;
@@ -22,11 +24,13 @@ namespace MysteryOfTheDungeon
             CellType.Vase, CellType.ClosedChest, CellType.Bake, CellType.KitchenTable, CellType.Tabletop, CellType.Sink, CellType.Chair,
             CellType.DinnerTable, CellType.BrokenVase, CellType.Basket, CellType.Ambry, CellType.BookTable };
 
-        public Player(Dictionary<string, Animations> animationsDictionary)
+        public Player(Dictionary<string, Animations> animationsDictionary, Interaction interactionManager, Inventory inventory)
         {
             AnimationsDictionary = animationsDictionary;
             AnimationManager = new AnimationManager(AnimationsDictionary.First().Value);
             AnimationManager.Position = PositionValue;
+            Inventory = inventory;
+            InteractionManager = interactionManager;
         }
 
         #region Move
@@ -59,6 +63,17 @@ namespace MysteryOfTheDungeon
             {
                 AnimationManager.Stop();
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                var playerCellPositionX = (int)((PositionValue.X + (TextureWidth / 2)) / 30 + 1);
+                var playerCellPositionY = (int)((PositionValue.Y + TextureWidth) / 30 + 1);
+
+                var interactionCells = GenerateInteractionCells(playerCellPositionX, playerCellPositionY, Map);
+                foreach (var cell in interactionCells)
+                {
+                    InteractionManager.MakeInteraction(cell.Value, Inventory);
+                }
+            }
            foreach (var mapCell in Map)
             {
                 if (IsTouchingLeft(mapCell, dx) && Keyboard.GetState().IsKeyDown(Keys.Left))
@@ -79,6 +94,34 @@ namespace MysteryOfTheDungeon
             }
             PositionValue.X += dx;
             PositionValue.Y += dy;
+        }
+
+        public List<SpriteMap> GenerateInteractionCells(int positionX, int positionY, SpriteMap[,] map)
+        {
+            //генерация такая, потому что нужно проверять не выходит ли индекс массива за пределы
+            var shift = new List<int>() { 1, -1 };
+            var result = new List<SpriteMap>() { map[positionX - 1, positionY - 1] };
+            for(int i = 0; i < 2; i++)
+            {
+                if (i == 0)
+                {
+                    foreach (var j in shift)
+                    {
+                        // -1 в каждой координате тк осчёт в массиве с 0
+                        if (positionX + j - 1 > 0 && positionX + j - 1 < 27)
+                            result.Add(map[(positionX + j) - 1, positionY - 1]);
+                    }
+                }
+                else
+                {
+                    foreach (var j in shift)
+                    {
+                        if (positionY + j - 1 > 0 && positionY + j - 1 < 28)
+                            result.Add(map[positionX - 1, (positionY + j) - 1]);
+                    }
+                }
+            }
+            return result;
         }
 
         #endregion

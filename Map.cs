@@ -105,7 +105,7 @@ namespace MysteryOfTheDungeon
         private readonly List<string> MapConstructor = new List<string>
         {
             "0222222200000000222222222220",
-            "0115751900000000aa111K555c10",
+            "0115751900000000aa111K551c10",
             "0111811122222222111111111110",
             "011111111111111111111111T110",
             "01611111010010001111111111B0",

@@ -73,12 +73,24 @@
 /processorParam:TextureFormat=Color
 /build:../../../../../Desktop/ИГРА ПРОЕКТ/topOfWall.png;MapTexture/TopOfWall.png
 
-#begin File.spritefont
+#begin Font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:File.spritefont
+/build:Font.spritefont
+
+#begin Inventory/BackgroundForText.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Inventory/BackgroundForText.png
 
 #begin Inventory/EmptyCell.png
 /importer:TextureImporter
@@ -103,6 +115,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Inventory/Inventory.png
+
+#begin Inventory/MasterKey.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Inventory/MasterKey.png
+
+#begin Inventory/NailPuller.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Inventory/NailPuller.png
 
 #begin MapTexture/Ambry.png
 /importer:TextureImporter

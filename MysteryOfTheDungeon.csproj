@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bonfire.cs" />
+    <Compile Include="Interaction.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="SpriteMap.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
@@ -81,7 +82,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Content\Content.mgcb" />
-    <None Include="Content\File.spritefont" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

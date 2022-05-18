@@ -55,6 +55,14 @@ with.
         <Start>&#32;</Start>
         <End>&#126;</End>
       </CharacterRegion>
+	      <CharacterRegion>
+        <Start>А</Start>
+        <End>Я</End>
+      </CharacterRegion>
+	      <CharacterRegion>
+        <Start>а</Start>
+        <End>я</End>
+      </CharacterRegion>
     </CharacterRegions>
   </Asset>
 </XnaContent>
