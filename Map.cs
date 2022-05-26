@@ -35,7 +35,11 @@ namespace MysteryOfTheDungeon
         Ambry = 'a',
         BookTable = 'T',
         GoldenKey = 'G',
-        Grit = 'g'
+        Grit = 'g',
+        EmptyBasket = 'e',
+        Hat = 'h',
+        Shoes = 'H',
+        DressedDummy = 'D'
     }
 
     class Map
@@ -65,6 +69,8 @@ namespace MysteryOfTheDungeon
         private Texture2D BookTableTexture;
         private Texture2D GoldenKeyTexture;
         private Texture2D GritTexture;
+        private Texture2D HatTexture;
+        private Texture2D ShoesTexture;
 
         protected readonly int MapTextureSide = 30;
 
@@ -73,7 +79,7 @@ namespace MysteryOfTheDungeon
             Texture2D bedBottomTexture, Texture2D dummyTexture, Texture2D vaseTexture, Texture2D closedChestTexture, Texture2D bakeTexture,
             Texture2D kitchenTableTexture, Texture2D sinkTexture, Texture2D tabletopTexture, Texture2D chairTexture, Texture2D dinnerTableTexture,
             Texture2D brokenvaseTexture, Texture2D shovelTexture, Texture2D basketTexture, Texture2D ambryTexture, Texture2D bookTableTexture,
-            Texture2D goldenKeyTexture, Texture2D gritTexture)
+            Texture2D goldenKeyTexture, Texture2D gritTexture, Texture2D hatTexture, Texture2D shoesTexture)
         {
             WallTopTexture = wallTopTexture;
             FloorTexture = floorTexture;
@@ -100,12 +106,14 @@ namespace MysteryOfTheDungeon
             BookTableTexture = bookTableTexture;
             GoldenKeyTexture = goldenKeyTexture;
             GritTexture = gritTexture;
+            HatTexture = hatTexture;
+            ShoesTexture = shoesTexture;
         }
         
         private readonly List<string> MapConstructor = new List<string>
         {
             "0222222200000000222222222220",
-            "0115751900000000aa111K551c10",
+            "0115751900000000aa11K1551c10",
             "0111811122222222111111111110",
             "011111111111111111111111T110",
             "01611111010010001111111111B0",
@@ -115,14 +123,14 @@ namespace MysteryOfTheDungeon
             "00G2211111111000S111111111k0",
             "0011110000001000000000000000",
             "0000012200001000022202220200",
-            "0022011102221222011101112100",
+            "0022011102221222011101112h00",
             "0011200001111111010101011100",
             "0011122001111111010101010000",
             "0010111221114111210121010000",
             "0012001111143411110111010000",
             "0011000001114111000000010000",
             "0000000001111111022222212220",
-            "0222222201111111011111111110",
+            "02222222011111110111111111H0",
             "0ggggggg00010000011111111110",
             "0ggggggg00210000011111111110",
             "0ggggggg22110000011111111110",
@@ -269,6 +277,16 @@ namespace MysteryOfTheDungeon
                         texture = GritTexture;
                         cellType = CellType.Grit;
                     }
+                    else if (mapCell.Equals('h'))
+                    {
+                        texture = HatTexture;
+                        cellType = CellType.Hat;
+                    }
+                    else if (mapCell.Equals('H'))
+                    {
+                        texture = ShoesTexture;
+                        cellType = CellType.Shoes;
+                    }
                     else
                     {
                         texture = SinkTexture;
@@ -283,6 +301,7 @@ namespace MysteryOfTheDungeon
             }
             return resultMap;
         }
+
 
         #endregion
 

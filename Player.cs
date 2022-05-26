@@ -17,12 +17,13 @@ namespace MysteryOfTheDungeon
         protected Dictionary<string, Animations> AnimationsDictionary;
         protected int TextureHight = 31;
         protected int TextureWidth = 20;
+        protected int MapTextureSide = 30;
         public Vector2 PositionValue;
         public float Speed;
         protected List<CellType> CollisionTextures = new List<CellType>() { CellType.Bonfire, CellType.WallFront, CellType.WallTop,
             CellType.Pedestal, CellType.BedsideTable, CellType.TableWithBook, CellType.BedTop, CellType.BedBottom, CellType.Dummy, 
             CellType.Vase, CellType.ClosedChest, CellType.Bake, CellType.KitchenTable, CellType.Tabletop, CellType.Sink, CellType.Chair,
-            CellType.DinnerTable, CellType.BrokenVase, CellType.Basket, CellType.Ambry, CellType.BookTable };
+            CellType.DinnerTable, CellType.BrokenVase, CellType.Basket, CellType.Ambry, CellType.BookTable, CellType.EmptyBasket, CellType.DressedDummy };
 
         public Player(Dictionary<string, Animations> animationsDictionary, Interaction interactionManager, Inventory inventory)
         {
@@ -65,13 +66,13 @@ namespace MysteryOfTheDungeon
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                var playerCellPositionX = (int)((PositionValue.X + (TextureWidth / 2)) / 30 + 1);
-                var playerCellPositionY = (int)((PositionValue.Y + TextureWidth) / 30 + 1);
+                var playerCellPositionX = (int)((PositionValue.X + (TextureWidth / 2)) / MapTextureSide + 1);
+                var playerCellPositionY = (int)((PositionValue.Y + TextureWidth) / MapTextureSide + 1);
 
                 var interactionCells = GenerateInteractionCells(playerCellPositionX, playerCellPositionY, Map);
                 foreach (var cell in interactionCells)
                 {
-                    InteractionManager.MakeInteraction(cell.Value, Inventory);
+                    InteractionManager.MakeInteraction(cell, Inventory.CurrentInventory);
                 }
             }
            foreach (var mapCell in Map)
@@ -98,18 +99,18 @@ namespace MysteryOfTheDungeon
 
         public List<SpriteMap> GenerateInteractionCells(int positionX, int positionY, SpriteMap[,] map)
         {
-            //генерация такая, потому что нужно проверять не выходит ли индекс массива за пределы
+            /*
             var shift = new List<int>() { 1, -1 };
-            var result = new List<SpriteMap>() { map[positionX - 1, positionY - 1] };
-            for(int i = 0; i < 2; i++)
+            var result = new List<(int, int)>() { (positionX - 1, positionY - 1) };
+            for (int i = 0; i < 2; i++)
             {
                 if (i == 0)
                 {
                     foreach (var j in shift)
                     {
-                        // -1 в каждой координате тк осчёт в массиве с 0
+                        // -1 в каждой координате тк отсчёт в массиве с 0
                         if (positionX + j - 1 > 0 && positionX + j - 1 < 27)
-                            result.Add(map[(positionX + j) - 1, positionY - 1]);
+                            result.Add(((positionX + j) - 1, positionY - 1));
                     }
                 }
                 else
@@ -117,9 +118,31 @@ namespace MysteryOfTheDungeon
                     foreach (var j in shift)
                     {
                         if (positionY + j - 1 > 0 && positionY + j - 1 < 28)
-                            result.Add(map[positionX - 1, (positionY + j) - 1]);
+                            result.Add((positionX - 1, (positionY + j) - 1));
                     }
-                }
+                }*/
+                //генерация такая, потому что нужно проверять не выходит ли индекс массива за пределы
+                var shift = new List<int>() { 1, -1 };
+                var result = new List<SpriteMap>() { map[positionX - 1, positionY - 1] };
+                for(int i = 0; i < 2; i++)
+                {
+                    if (i == 0)
+                    {
+                        foreach (var j in shift)
+                        {
+                            // -1 в каждой координате тк отсчёт в массиве с 0
+                            if (positionX + j - 1 > 0 && positionX + j - 1 < 27)
+                                result.Add(map[(positionX + j) - 1, positionY - 1]);
+                        }
+                    }
+                    else
+                    {
+                        foreach (var j in shift)
+                        {
+                            if (positionY + j - 1 > 0 && positionY + j - 1 < 28)
+                                result.Add(map[positionX - 1, (positionY + j) - 1]);
+                        }
+                    }
             }
             return result;
         }

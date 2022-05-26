@@ -70,6 +70,7 @@
     <Compile Include="Bonfire.cs" />
     <Compile Include="Interaction.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="MouseHandling.cs" />
     <Compile Include="SpriteMap.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Models\Animations.cs" />

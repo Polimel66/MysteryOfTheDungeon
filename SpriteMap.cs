@@ -11,7 +11,7 @@ namespace MysteryOfTheDungeon
 {
     class SpriteMap
     {
-        public readonly Texture2D Texture;
+        public Texture2D Texture;
         public CellType Value;
         public Vector2 Position;
         public SpriteMap(Texture2D texture, Vector2 position, CellType value)
