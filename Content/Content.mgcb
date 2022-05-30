@@ -404,6 +404,18 @@
 /processorParam:TextureFormat=Color
 /build:MapTexture/Bonfire.png
 
+#begin MapTexture/BookOnTable.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/BookOnTable.png
+
 #begin MapTexture/BookTable.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -451,6 +463,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MapTexture/ClosedChest.png
+
+#begin MapTexture/ClosedDoor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/ClosedDoor.png
+
+#begin MapTexture/ClosedGoldenDoor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/ClosedGoldenDoor.png
 
 #begin MapTexture/DinnerTable.png
 /importer:TextureImporter
@@ -571,6 +607,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MapTexture/OpenedChest.png
+
+#begin MapTexture/OpenedDoor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/OpenedDoor.png
+
+#begin MapTexture/OpenedGoldenDoor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/OpenedGoldenDoor.png
 
 #begin MapTexture/Pedestal.png
 /importer:TextureImporter

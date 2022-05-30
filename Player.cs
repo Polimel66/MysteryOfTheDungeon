@@ -23,7 +23,8 @@ namespace MysteryOfTheDungeon
         protected List<CellType> CollisionTextures = new List<CellType>() { CellType.Bonfire, CellType.WallFront, CellType.WallTop,
             CellType.Pedestal, CellType.BedsideTable, CellType.TableWithBook, CellType.BedTop, CellType.BedBottom, CellType.Dummy, 
             CellType.Vase, CellType.ClosedChest, CellType.Bake, CellType.KitchenTable, CellType.Tabletop, CellType.Sink, CellType.Chair,
-            CellType.DinnerTable, CellType.BrokenVase, CellType.Basket, CellType.Ambry, CellType.BookTable, CellType.EmptyBasket, CellType.DressedDummy };
+            CellType.DinnerTable, CellType.BrokenVase, CellType.Basket, CellType.Ambry, CellType.BookTable, CellType.EmptyBasket, 
+            CellType.DressedDummy, CellType.ClosedDoor, CellType.BookOnTable, CellType.ClosedGoldenDoor };
 
         public Player(Dictionary<string, Animations> animationsDictionary, Interaction interactionManager, Inventory inventory)
         {

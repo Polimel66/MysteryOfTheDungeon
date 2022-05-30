@@ -19,9 +19,12 @@ namespace MysteryOfTheDungeon
         private Texture2D FloorTexture;
         private Texture2D EmptyBasketTexture;
         private Texture2D DressedDummyTexture;
+        private Texture2D OpenedDoorTexture;
+        private Texture2D OpenedGoldenDoorTexture;
 
 
-        public Interaction(Texture2D floorTexture, Texture2D emptyBasketTexture, Dictionary<int, bool> cellState, Texture2D dressedDummyTexture)
+        public Interaction(Texture2D floorTexture, Texture2D emptyBasketTexture, Dictionary<int, bool> cellState, Texture2D dressedDummyTexture,
+            Texture2D openedDoorTexture, Texture2D openedGoldenDoorTexture)
         {
             FloorTexture = floorTexture;
             EmptyBasketTexture = emptyBasketTexture;
@@ -37,10 +40,15 @@ namespace MysteryOfTheDungeon
                 [CellType.GoldenKey] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
                 [CellType.Basket] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
                 [CellType.Hat] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
-                [CellType.Shoes] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem }
+                [CellType.Shoes] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
+                [CellType.ClosedDoor] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
+                [CellType.BookOnTable] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText },
+                [CellType.ClosedGoldenDoor] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem }
             };
             CellState = cellState;
             DressedDummyTexture = dressedDummyTexture;
+            OpenedDoorTexture = openedDoorTexture;
+            OpenedGoldenDoorTexture = openedGoldenDoorTexture;
         }
 
 
@@ -174,6 +182,27 @@ namespace MysteryOfTheDungeon
                     {
                         ReplaceInventorySlots(CellState, inventory);
                         FindItem(interactionCell, inventory);
+                        OutputText = "Реликвия! Я приближаюсь к выходу...";
+                    }
+                    break;
+                case CellType.ClosedDoor:
+                    if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.MasterKey))
+                    {
+                        ReplaceInventorySlots(CellState, inventory);
+                        interactionCell.Texture = OpenedDoorTexture;
+                        interactionCell.Value = CellType.OpenedDoor;
+                        OutputText = "Открыл! Надеюсь еще не поздно\n" +
+                            "помочь этой бедняге...";
+                    }
+                    break;
+                case CellType.ClosedGoldenDoor:
+                    if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.GoldenKey))
+                    {
+                        ReplaceInventorySlots(CellState, inventory);
+                        interactionCell.Texture = OpenedGoldenDoorTexture;
+                        interactionCell.Value = CellType.OpenedGoldenDoor;
+                        OutputText = "Ключ подошел! Отлично,\n" +
+                            "двигаемся дальше.";
                     }
                     break;
                 default:
@@ -187,7 +216,7 @@ namespace MysteryOfTheDungeon
             switch (interactionSubject)
             {
                 case CellType.TableWithBook:
-                    OutputText = "Идет тридцать пятая неделя моего\n" +
+                    OutputText = "-Идет тридцать пятая неделя моего\n" +
                         "заточения. Я уже не надеюсь на\n" +
                         "спасение. Злой маг похитил меня\n" +
                         "и оставил существовать в этом\n" +
@@ -198,7 +227,7 @@ namespace MysteryOfTheDungeon
                         "и спрятала ее в вазу.";
                     break;
                 case CellType.BookTable:
-                    OutputText = "Я редко выбираюсь на\n" +
+                    OutputText = "-Я редко выбираюсь на\n" +
                         "кухню. Боюсь, что маг меня пой-\n" +
                         "мает. Но иногда, голод берет\n" +
                         "свое. Я съедаю крошки и объедки,\n" +
@@ -259,6 +288,23 @@ namespace MysteryOfTheDungeon
                         OutputText = "Туфли?! Может всю одежду,\n" +
                             "которую я нашел можно куда-то надеть?\n" +
                             "Надо попытаться ее применить.";
+                    break;
+                case CellType.ClosedDoor:
+                    if (!inventory.Contains(InventoryItems.MasterKey))
+                        OutputText = "Заперто.";
+                    break;
+                case CellType.BookOnTable:
+                    OutputText = "-Я изучала всю темницу пока\n" +
+                        "маг спал. Вчера нашла старые\n" +
+                        "свитки в ящике. Там сказано, что\n" +
+                        "в этом месте есть лишь один выход.\n" +
+                        "Он открывается с помощью 4 релик-\n" +
+                        "вий. Я в отчаянии, не знаю смогу\n" +
+                        "ли их найти.";
+                    break;
+                case CellType.ClosedGoldenDoor:
+                    if (!inventory.Contains(InventoryItems.GoldenKey))
+                        OutputText = "Заперто. Надо найти ключ.";
                     break;
                 default:
                     OutputText = "Я не могу с этим взаимодействовать.";

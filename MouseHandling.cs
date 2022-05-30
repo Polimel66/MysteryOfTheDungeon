@@ -12,6 +12,12 @@ namespace MysteryOfTheDungeon
     class MouseHandling
     {
         public Dictionary<int, bool> CellState;
+        private readonly int LeftBorderInventory = 875;
+        private readonly int RightBorderInventory = 1215;
+        private readonly int TopBorderInventory = 470;
+        private readonly int BottomBorderInventory = 725;
+        private readonly int InventorySlotSize = 85;
+        private readonly int CountCellsInRow = 4;
         MouseState LastMouseState = Mouse.GetState();
         public MouseHandling(Dictionary<int, bool> cellState)
         {
@@ -24,11 +30,11 @@ namespace MysteryOfTheDungeon
             if(currentMouseState.LeftButton == ButtonState.Pressed && LastMouseState.LeftButton == ButtonState.Released)
             {
                 LastMouseState = currentMouseState;
-                if (currentMouseState.X > 875 && currentMouseState.X < 1215 &&
-                    currentMouseState.Y > 470 && currentMouseState.Y < 725)
+                if (currentMouseState.X > LeftBorderInventory && currentMouseState.X < RightBorderInventory &&
+                    currentMouseState.Y > TopBorderInventory && currentMouseState.Y < BottomBorderInventory)
                 {
-                    var column = (currentMouseState.X - 875) / 85;
-                    var line = (currentMouseState.Y - 470) / 85;
+                    var column = (currentMouseState.X - LeftBorderInventory) / InventorySlotSize;
+                    var line = (currentMouseState.Y - TopBorderInventory) / InventorySlotSize;
                     return (line, column);
                 }
             }
@@ -40,7 +46,7 @@ namespace MysteryOfTheDungeon
         {
             if (updatedCell.Item1 >= 0 && updatedCell.Item2 >= 0)
             {
-                var cellNumber = updatedCell.Item1 * 4 + updatedCell.Item2;
+                var cellNumber = updatedCell.Item1 * CountCellsInRow + updatedCell.Item2;
                 CellState[cellNumber] = !CellState[cellNumber];
             }
         }
@@ -49,7 +55,6 @@ namespace MysteryOfTheDungeon
         {
             var cellCoordinate = FindCellCoordinate();
             UpdateCellState(cellCoordinate);
-
         }
     }
 }

@@ -21,7 +21,7 @@ namespace MysteryOfTheDungeon
         BedTop = 7,
         BedBottom = 8,
         Dummy = 9,
-        Vase = 'v',// = 'v'
+        Vase = 'v',
         ClosedChest = 'c',
         Bake = 'b',
         KitchenTable = 'k',
@@ -39,7 +39,12 @@ namespace MysteryOfTheDungeon
         EmptyBasket = 'e',
         Hat = 'h',
         Shoes = 'H',
-        DressedDummy = 'D'
+        DressedDummy = 'D',
+        OpenedDoor = 'o',
+        ClosedDoor = 'O',
+        BookOnTable = 'l',
+        ClosedGoldenDoor = 'N',
+        OpenedGoldenDoor = 'n'
     }
 
     class Map
@@ -71,6 +76,9 @@ namespace MysteryOfTheDungeon
         private Texture2D GritTexture;
         private Texture2D HatTexture;
         private Texture2D ShoesTexture;
+        private Texture2D ClosedDoorTexture;
+        private Texture2D BookOnTableTexture;
+        private Texture2D ClosedGoldenDoorTexture;
 
         protected readonly int MapTextureSide = 30;
 
@@ -79,7 +87,8 @@ namespace MysteryOfTheDungeon
             Texture2D bedBottomTexture, Texture2D dummyTexture, Texture2D vaseTexture, Texture2D closedChestTexture, Texture2D bakeTexture,
             Texture2D kitchenTableTexture, Texture2D sinkTexture, Texture2D tabletopTexture, Texture2D chairTexture, Texture2D dinnerTableTexture,
             Texture2D brokenvaseTexture, Texture2D shovelTexture, Texture2D basketTexture, Texture2D ambryTexture, Texture2D bookTableTexture,
-            Texture2D goldenKeyTexture, Texture2D gritTexture, Texture2D hatTexture, Texture2D shoesTexture)
+            Texture2D goldenKeyTexture, Texture2D gritTexture, Texture2D hatTexture, Texture2D shoesTexture, Texture2D closedDoorTexture,
+            Texture2D bookOnTableTexture, Texture2D closedGoldenDoorTexture)
         {
             WallTopTexture = wallTopTexture;
             FloorTexture = floorTexture;
@@ -108,6 +117,9 @@ namespace MysteryOfTheDungeon
             GritTexture = gritTexture;
             HatTexture = hatTexture;
             ShoesTexture = shoesTexture;
+            ClosedDoorTexture = closedDoorTexture;
+            BookOnTableTexture = bookOnTableTexture;
+            ClosedGoldenDoorTexture = closedGoldenDoorTexture;
         }
         
         private readonly List<string> MapConstructor = new List<string>
@@ -115,7 +127,7 @@ namespace MysteryOfTheDungeon
             "0222222200000000222222222220",
             "0115751900000000aa11K1551c10",
             "0111811122222222111111111110",
-            "011111111111111111111111T110",
+            "01111111O111111N11111111T110",
             "01611111010010001111111111B0",
             "011111v1010010001111111111b0",
             "0000000001001000111CCCCC11s0",
@@ -124,7 +136,7 @@ namespace MysteryOfTheDungeon
             "0011110000001000000000000000",
             "0000012200001000022202220200",
             "0022011102221222011101112h00",
-            "0011200001111111010101011100",
+            "00112000011111l1010101011100",
             "0011122001111111010101010000",
             "0010111221114111210121010000",
             "0012001111143411110111010000",
@@ -286,6 +298,21 @@ namespace MysteryOfTheDungeon
                     {
                         texture = ShoesTexture;
                         cellType = CellType.Shoes;
+                    }
+                    else if (mapCell.Equals('O'))
+                    {
+                        texture = ClosedDoorTexture;
+                        cellType = CellType.ClosedDoor;
+                    }
+                    else if (mapCell.Equals('l'))
+                    {
+                        texture = BookOnTableTexture;
+                        cellType = CellType.BookOnTable;
+                    }
+                    else if (mapCell.Equals('N'))
+                    {
+                        texture = ClosedGoldenDoorTexture;
+                        cellType = CellType.ClosedGoldenDoor;
                     }
                     else
                     {
