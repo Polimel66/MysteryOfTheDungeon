@@ -92,6 +92,30 @@
 /processorParam:TextureFormat=Color
 /build:Inventory/BackgroundForText.png
 
+#begin Inventory/BlueKey.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Inventory/BlueKey.png
+
+#begin Inventory/BlueKeyOn.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Inventory/BlueKeyOn.png
+
 #begin Inventory/Dress.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -272,6 +296,30 @@
 /processorParam:TextureFormat=Color
 /build:Inventory/NailPullerOn.png
 
+#begin Inventory/SecondRelic.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Inventory/SecondRelic.png
+
+#begin Inventory/SecondRelicOn.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Inventory/SecondRelicOn.png
+
 #begin Inventory/ShoesInventory.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -319,6 +367,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Inventory/ShovelInventoryOn.png
+
+#begin Inventory/ThirdRelic.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Inventory/ThirdRelic.png
+
+#begin Inventory/ThirdRelicOn.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Inventory/ThirdRelicOn.png
 
 #begin MapTexture/Ambry.png
 /importer:TextureImporter
@@ -392,6 +464,18 @@
 /processorParam:TextureFormat=Color
 /build:MapTexture/BedTop.png
 
+#begin MapTexture/Boards.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/Boards.png
+
 #begin MapTexture/Bonfire.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -428,6 +512,18 @@
 /processorParam:TextureFormat=Color
 /build:MapTexture/BookTable.png
 
+#begin MapTexture/BrokenBoards.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/BrokenBoards.png
+
 #begin MapTexture/BrokenVase.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -451,6 +547,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MapTexture/Chair.png
+
+#begin MapTexture/ClosedBlueDoor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/ClosedBlueDoor.png
 
 #begin MapTexture/ClosedChest.png
 /importer:TextureImporter
@@ -512,6 +620,18 @@
 /processorParam:TextureFormat=Color
 /build:MapTexture/DressedDummy.png
 
+#begin MapTexture/DugOutHeap.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/DugOutHeap.png
+
 #begin MapTexture/Dummy.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -535,6 +655,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MapTexture/EmptyBasket.png
+
+#begin MapTexture/ExcavatedSand.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/ExcavatedSand.png
 
 #begin MapTexture/frontOfWall.png
 /importer:TextureImporter
@@ -596,6 +728,18 @@
 /processorParam:TextureFormat=Color
 /build:MapTexture/KitchenTable.png
 
+#begin MapTexture/OpenedBlueDoor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/OpenedBlueDoor.png
+
 #begin MapTexture/OpenedChest.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -632,6 +776,18 @@
 /processorParam:TextureFormat=Color
 /build:MapTexture/OpenedGoldenDoor.png
 
+#begin MapTexture/Password.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/Password.png
+
 #begin MapTexture/Pedestal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -643,6 +799,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MapTexture/Pedestal.png
+
+#begin MapTexture/PileOfStones.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/PileOfStones.png
+
+#begin MapTexture/Scroll.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/Scroll.png
 
 #begin MapTexture/Shoes.png
 /importer:TextureImporter

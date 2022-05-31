@@ -19,7 +19,9 @@ namespace MysteryOfTheDungeon
         NailPuller,
         GoldenKey,
         BlueKey,
-        FirstRelic
+        FirstRelic,
+        SecondRelic,
+        ThirdRelic
         // + 4 реликвии
     }
 
@@ -54,13 +56,20 @@ namespace MysteryOfTheDungeon
         private Texture2D ShoesOnTexture;
         private Texture2D FirstRelicTexture;
         private Texture2D FirstRelicOnTexture;
+        private Texture2D SecondRelicTexture;
+        private Texture2D SecondRelicOnTexture;
+        private Texture2D BlueKeyTexture;
+        private Texture2D BlueKeyOnTexture;
+        private Texture2D ThirdRelicTexture;
+        private Texture2D ThirdRelicOnTexture;
 
         public Inventory(Texture2D inventoryTexture, Texture2D emptyTexture, Texture2D backgroundForTextTexture,
             Texture2D masterKeyTexture, Texture2D nailPullerTexture, Texture2D shovelTexture, Texture2D goldenKeyTexture,
             Texture2D dressTexture, Texture2D hatTexture, Texture2D shoesTexture, Texture2D emptyOnTexture,
             Texture2D masterKeyOnTexture, Texture2D nailPullerOnTexture, Texture2D shovelOnTexture,
             Texture2D goldenKeyOnTexture, Texture2D dressOnTexture, Texture2D hatOnTexture, Texture2D shoesOnTexture,
-            Texture2D firstRelicTexture, Texture2D firstRelicOnTexture)
+            Texture2D firstRelicTexture, Texture2D firstRelicOnTexture, Texture2D secondRelicTexture, Texture2D secondRelicOnTexture,
+            Texture2D blueKeyTexture, Texture2D blueKeyOnTexture, Texture2D thirdRelicTexture, Texture2D thirdRelicOnTexture)
         {
             BackgroundTexture = inventoryTexture;
             BackgroundForTextTexture = backgroundForTextTexture;
@@ -89,6 +98,12 @@ namespace MysteryOfTheDungeon
             ShoesOnTexture = shoesOnTexture;
             FirstRelicTexture = firstRelicTexture;
             FirstRelicOnTexture = firstRelicOnTexture;
+            SecondRelicTexture = secondRelicTexture;
+            SecondRelicOnTexture = secondRelicOnTexture;
+            BlueKeyTexture = blueKeyTexture;
+            BlueKeyOnTexture = blueKeyOnTexture;
+            ThirdRelicTexture = thirdRelicTexture;
+            ThirdRelicOnTexture = thirdRelicOnTexture;
         }
 
         public SpriteMap[,] GenerateInventory()
@@ -156,6 +171,24 @@ namespace MysteryOfTheDungeon
                             texture = FirstRelicTexture;
                         else
                             texture = FirstRelicOnTexture;
+                        break;
+                    case InventoryItems.SecondRelic:
+                        if (!CellState[i])
+                            texture = SecondRelicTexture;
+                        else
+                            texture = SecondRelicOnTexture;
+                        break;
+                    case InventoryItems.BlueKey:
+                        if (!CellState[i])
+                            texture = BlueKeyTexture;
+                        else
+                            texture = BlueKeyOnTexture;
+                        break;
+                    case InventoryItems.ThirdRelic:
+                        if (!CellState[i])
+                            texture = ThirdRelicTexture;
+                        else
+                            texture = ThirdRelicOnTexture;
                         break;
                     default:
                         texture = EmptyTexture;

@@ -21,10 +21,14 @@ namespace MysteryOfTheDungeon
         private Texture2D DressedDummyTexture;
         private Texture2D OpenedDoorTexture;
         private Texture2D OpenedGoldenDoorTexture;
-
+        private Texture2D BrokenBoardsTexture;
+        private Texture2D ExcavatedSandTexture;
+        private Texture2D OpenedBlueDoorTexture;
+        private Texture2D DugOutHeapTexture;
 
         public Interaction(Texture2D floorTexture, Texture2D emptyBasketTexture, Dictionary<int, bool> cellState, Texture2D dressedDummyTexture,
-            Texture2D openedDoorTexture, Texture2D openedGoldenDoorTexture)
+            Texture2D openedDoorTexture, Texture2D openedGoldenDoorTexture, Texture2D brokenBoardsTexture, Texture2D excavatedSandTexture,
+            Texture2D openedBlueDoorTexture, Texture2D dugOutHeapTexture)
         {
             FloorTexture = floorTexture;
             EmptyBasketTexture = emptyBasketTexture;
@@ -43,12 +47,24 @@ namespace MysteryOfTheDungeon
                 [CellType.Shoes] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
                 [CellType.ClosedDoor] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
                 [CellType.BookOnTable] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText },
-                [CellType.ClosedGoldenDoor] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem }
+                [CellType.ClosedGoldenDoor] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
+                [CellType.Boards] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
+                [CellType.Grit] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
+                [CellType.SandWithBlueKey] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
+                [CellType.SandWithRelic] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
+                [CellType.ClosedBlueDoor] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
+                [CellType.Scroll] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText },
+                [CellType.PileOfStones] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
+                [CellType.HeapWithRelic] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem }
             };
             CellState = cellState;
             DressedDummyTexture = dressedDummyTexture;
             OpenedDoorTexture = openedDoorTexture;
             OpenedGoldenDoorTexture = openedGoldenDoorTexture;
+            BrokenBoardsTexture = brokenBoardsTexture;
+            ExcavatedSandTexture = excavatedSandTexture;
+            OpenedBlueDoorTexture = openedBlueDoorTexture;
+            DugOutHeapTexture = dugOutHeapTexture;
         }
 
 
@@ -131,6 +147,33 @@ namespace MysteryOfTheDungeon
                         interactionCell.Value = CellType.Floor;
                     }
                     break;
+                case CellType.SandWithBlueKey:
+                    if (!inventory.Contains(InventoryItems.BlueKey))
+                    {
+                        AddToInventory(inventory, InventoryItems.BlueKey);
+                        interactionCell.Texture = ExcavatedSandTexture;
+                        interactionCell.Value = CellType.ExcavatedSand;
+
+                    }
+                    break;
+                case CellType.SandWithRelic:
+                    if (!inventory.Contains(InventoryItems.SecondRelic))
+                    {
+                        AddToInventory(inventory, InventoryItems.SecondRelic);
+                        interactionCell.Texture = ExcavatedSandTexture;
+                        interactionCell.Value = CellType.ExcavatedSand;
+
+                    }
+                    break;
+                case CellType.HeapWithRelic:
+                    if (!inventory.Contains(InventoryItems.ThirdRelic))
+                    {
+                        AddToInventory(inventory, InventoryItems.ThirdRelic);
+                        interactionCell.Texture = DugOutHeapTexture;
+                        interactionCell.Value = CellType.DugOutHeap;
+
+                    }
+                    break;
                 default:
                     break;
             }
@@ -205,6 +248,65 @@ namespace MysteryOfTheDungeon
                             "двигаемся дальше.";
                     }
                     break;
+                case CellType.Boards:
+                    if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.NailPuller))
+                    {
+                        ReplaceInventorySlots(CellState, inventory);
+                        interactionCell.Texture = BrokenBoardsTexture;
+                        interactionCell.Value = CellType.BrokenBoards;
+                        OutputText = "Фух, надеюсь маг не очень\n" +
+                            "будет злиться из-за поломки.";
+                    }
+                    break;
+                case CellType.Grit:
+                    if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.Shovel))
+                    {
+                        interactionCell.Texture = ExcavatedSandTexture;
+                        interactionCell.Value = CellType.ExcavatedSand;
+                    }
+                    break;
+                case CellType.SandWithBlueKey:
+                    if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.Shovel))
+                    {
+                        FindItem(interactionCell, inventory);
+                        OutputText = "Синий ключ! Я могу проникнуть\n" +
+                            "в последнюю комнату.";
+                    }
+                    break;
+                case CellType.SandWithRelic:
+                    if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.Shovel))
+                    {
+                        FindItem(interactionCell, inventory);
+                        OutputText = "Реликвия! Еще немного\n" +
+                            "и я выберусь отсюда, и помогу\n" +
+                            "этой бедной девушке.";
+                    }
+                    break;
+                case CellType.ClosedBlueDoor:
+                    if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.BlueKey))
+                    {
+                        ReplaceInventorySlots(CellState, inventory);
+                        interactionCell.Texture = OpenedBlueDoorTexture;
+                        interactionCell.Value = CellType.OpenedBlueDoor;
+                        OutputText = "Еще одна дверь открыта.";
+                    }
+                    break;
+                case CellType.PileOfStones:
+                    if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.Shovel))
+                    {
+                        interactionCell.Texture = DugOutHeapTexture;
+                        interactionCell.Value = CellType.DugOutHeap;
+                    }
+                    break;
+                case CellType.HeapWithRelic:
+                    if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.Shovel))
+                    {
+                        FindItem(interactionCell, inventory);
+                        OutputText = "Еще одна реликвия!\n" +
+                            "Держись Джулия, я скоро спасу\n" +
+                            "тебя.";
+                    }
+                    break;
                 default:
                     break;
             }
@@ -224,7 +326,9 @@ namespace MysteryOfTheDungeon
                         "в книгах, чтобы не сойти с ума...\n" +
                         "Но я не сижу на месте, а ищу вы-\n" +
                         "ход отсюда. Я смастерила отмычку\n" +
-                        "и спрятала ее в вазу.";
+                        "и спрятала ее в вазу.\n" +
+                        "P.S. Забыла назвать свое имя\n" +
+                        "Джулия.";
                     break;
                 case CellType.BookTable:
                     OutputText = "-Я редко выбираюсь на\n" +
@@ -305,6 +409,30 @@ namespace MysteryOfTheDungeon
                 case CellType.ClosedGoldenDoor:
                     if (!inventory.Contains(InventoryItems.GoldenKey))
                         OutputText = "Заперто. Надо найти ключ.";
+                    break;
+                case CellType.ClosedBlueDoor:
+                    if (!inventory.Contains(InventoryItems.BlueKey))
+                        OutputText = "Закрыто.";
+                    break;
+                case CellType.Boards:
+                    if (!inventory.Contains(InventoryItems.NailPuller))
+                        OutputText = "Проход забит досками.\n" +
+                            "Но я думаю, что его можно чем-то\n" +
+                            "проломить.";
+                    break;
+                case CellType.Scroll:
+                    OutputText = "-Я нашла лишь одну релик\n" +
+                        "вию. Где спрятаны остальные -\n" +
+                        "представить не могу. Я больше\n" +
+                        "не буду пытаться выбраться\n" +
+                        "отсюда. Но однажды, здесь\n" +
+                        "окажется новая жертва. Поэтому\n" +
+                        "я спрячу этот предмет так, чтобы\n" +
+                        "в будущем он помог бедняге. Ком-\n" +
+                        "ната, в которой лежит эта записка,\n" +
+                        "используется для хранения\n" +
+                        "куч камней. Именно в одну из\n" +
+                        "этих куч я и... спрячу реликвию.";
                     break;
                 default:
                     OutputText = "Я не могу с этим взаимодействовать.";

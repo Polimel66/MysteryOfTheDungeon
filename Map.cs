@@ -36,6 +36,8 @@ namespace MysteryOfTheDungeon
         BookTable = 'T',
         GoldenKey = 'G',
         Grit = 'g',
+        SandWithRelic = 'f',
+        SandWithBlueKey = 'F',
         EmptyBasket = 'e',
         Hat = 'h',
         Shoes = 'H',
@@ -44,7 +46,17 @@ namespace MysteryOfTheDungeon
         ClosedDoor = 'O',
         BookOnTable = 'l',
         ClosedGoldenDoor = 'N',
-        OpenedGoldenDoor = 'n'
+        OpenedGoldenDoor = 'n',
+        Boards = 'L',
+        BrokenBoards = 'p',
+        ClosedBlueDoor = 'R',
+        OpenedBlueDoor = 'r',
+        ExcavatedSand = 'E',
+        PileOfStones = 'P',
+        Scroll = 'm',
+        DugOutHeap = 'M',
+        HeapWithRelic = 'x',
+        Password = 'u'
     }
 
     class Map
@@ -79,6 +91,11 @@ namespace MysteryOfTheDungeon
         private Texture2D ClosedDoorTexture;
         private Texture2D BookOnTableTexture;
         private Texture2D ClosedGoldenDoorTexture;
+        private Texture2D BoardsTexture;
+        private Texture2D ClosedBlueDoorTexture;
+        private Texture2D PileOfStonesTexture;
+        private Texture2D ScrollTexture;
+        private Texture2D PasswordTexture;
 
         protected readonly int MapTextureSide = 30;
 
@@ -88,7 +105,8 @@ namespace MysteryOfTheDungeon
             Texture2D kitchenTableTexture, Texture2D sinkTexture, Texture2D tabletopTexture, Texture2D chairTexture, Texture2D dinnerTableTexture,
             Texture2D brokenvaseTexture, Texture2D shovelTexture, Texture2D basketTexture, Texture2D ambryTexture, Texture2D bookTableTexture,
             Texture2D goldenKeyTexture, Texture2D gritTexture, Texture2D hatTexture, Texture2D shoesTexture, Texture2D closedDoorTexture,
-            Texture2D bookOnTableTexture, Texture2D closedGoldenDoorTexture)
+            Texture2D bookOnTableTexture, Texture2D closedGoldenDoorTexture, Texture2D boardsTexture, Texture2D closedBlueDoorTexture,
+            Texture2D pileOfStonesTexture, Texture2D scrollTexture, Texture2D passwordTexture)
         {
             WallTopTexture = wallTopTexture;
             FloorTexture = floorTexture;
@@ -120,6 +138,11 @@ namespace MysteryOfTheDungeon
             ClosedDoorTexture = closedDoorTexture;
             BookOnTableTexture = bookOnTableTexture;
             ClosedGoldenDoorTexture = closedGoldenDoorTexture;
+            BoardsTexture = boardsTexture;
+            ClosedBlueDoorTexture = closedBlueDoorTexture;
+            PileOfStonesTexture = pileOfStonesTexture;
+            ScrollTexture = scrollTexture;
+            PasswordTexture = passwordTexture;
         }
         
         private readonly List<string> MapConstructor = new List<string>
@@ -135,20 +158,20 @@ namespace MysteryOfTheDungeon
             "00G2211111111000S111111111k0",
             "0011110000001000000000000000",
             "0000012200001000022202220200",
-            "0022011102221222011101112h00",
+            "0022011u02221222011101112h00",
             "00112000011111l1010101011100",
             "0011122001111111010101010000",
             "0010111221114111210121010000",
             "0012001111143411110111010000",
-            "0011000001114111000000010000",
+            "00110000011141110000000R0000",
             "0000000001111111022222212220",
-            "02222222011111110111111111H0",
-            "0ggggggg00010000011111111110",
-            "0ggggggg00210000011111111110",
-            "0ggggggg22110000011111111110",
-            "0ggggggg11110000011111111110",
-            "0ggggggg00110000011111111110",
-            "0ggggggg00010000011111111110",
+            "02222222011111110PP11P1111H0",
+            "0ggggggg0001000001P1PP111110",
+            "0ggggFgg0021000001111111PPP0",
+            "0ggggggg221100000111111PP110",
+            "0gggggggL1110000011111111110",
+            "0gfggggg00110000011PP11111P0",
+            "0ggggggg000100000P1P1111mPx0",
             "0000000000000000000000000000"
         };
 
@@ -313,6 +336,46 @@ namespace MysteryOfTheDungeon
                     {
                         texture = ClosedGoldenDoorTexture;
                         cellType = CellType.ClosedGoldenDoor;
+                    }
+                    else if (mapCell.Equals('L'))
+                    {
+                        texture = BoardsTexture;
+                        cellType = CellType.Boards;
+                    }
+                    else if (mapCell.Equals('R'))
+                    {
+                        texture = ClosedBlueDoorTexture;
+                        cellType = CellType.ClosedBlueDoor;
+                    }
+                    else if (mapCell.Equals('f'))
+                    {
+                        texture = GritTexture;
+                        cellType = CellType.SandWithRelic;
+                    }
+                    else if (mapCell.Equals('F'))
+                    {
+                        texture = GritTexture;
+                        cellType = CellType.SandWithBlueKey;
+                    }
+                    else if (mapCell.Equals('P'))
+                    {
+                        texture = PileOfStonesTexture;
+                        cellType = CellType.PileOfStones;
+                    }
+                    else if (mapCell.Equals('m'))
+                    {
+                        texture = ScrollTexture;
+                        cellType = CellType.Scroll;
+                    }
+                    else if (mapCell.Equals('x'))
+                    {
+                        texture = PileOfStonesTexture;
+                        cellType = CellType.HeapWithRelic;
+                    }
+                    else if (mapCell.Equals('u'))
+                    {
+                        texture = PasswordTexture;
+                        cellType = CellType.Password;
                     }
                     else
                     {

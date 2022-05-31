@@ -20,11 +20,15 @@ namespace MysteryOfTheDungeon
         protected int MapTextureSide = 30;
         public Vector2 PositionValue;
         public float Speed;
-        protected List<CellType> CollisionTextures = new List<CellType>() { CellType.Bonfire, CellType.WallFront, CellType.WallTop,
+        protected List<CellType> CollisionTextures = new List<CellType>() 
+        { 
+            CellType.Bonfire, CellType.WallFront, CellType.WallTop,
             CellType.Pedestal, CellType.BedsideTable, CellType.TableWithBook, CellType.BedTop, CellType.BedBottom, CellType.Dummy, 
             CellType.Vase, CellType.ClosedChest, CellType.Bake, CellType.KitchenTable, CellType.Tabletop, CellType.Sink, CellType.Chair,
             CellType.DinnerTable, CellType.BrokenVase, CellType.Basket, CellType.Ambry, CellType.BookTable, CellType.EmptyBasket, 
-            CellType.DressedDummy, CellType.ClosedDoor, CellType.BookOnTable, CellType.ClosedGoldenDoor };
+            CellType.DressedDummy, CellType.ClosedDoor, CellType.BookOnTable, CellType.ClosedGoldenDoor, CellType.Boards, CellType.ClosedBlueDoor,
+            CellType.PileOfStones, CellType.Scroll
+        };
 
         public Player(Dictionary<string, Animations> animationsDictionary, Interaction interactionManager, Inventory inventory)
         {

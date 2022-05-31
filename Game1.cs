@@ -52,7 +52,10 @@ namespace MysteryOfTheDungeon
                 Content.Load<Texture2D>("MapTexture/BookTable"), Content.Load<Texture2D>("MapTexture/GoldenKey"),
                 Content.Load<Texture2D>("MapTexture/Grit"), Content.Load<Texture2D>("MapTexture/Hat"), 
                 Content.Load<Texture2D>("MapTexture/Shoes"), Content.Load<Texture2D>("MapTexture/ClosedDoor"),
-                Content.Load<Texture2D>("MapTexture/BookOnTable"), Content.Load<Texture2D>("MapTexture/ClosedGoldenDoor"));
+                Content.Load<Texture2D>("MapTexture/BookOnTable"), Content.Load<Texture2D>("MapTexture/ClosedGoldenDoor"),
+                Content.Load<Texture2D>("MapTexture/Boards"), Content.Load<Texture2D>("MapTexture/ClosedBlueDoor"),
+                Content.Load<Texture2D>("MapTexture/PileOfStones"), Content.Load<Texture2D>("MapTexture/Scroll"),
+                Content.Load<Texture2D>("MapTexture/Password"));
             Map = MapConstructor.GenerateMap();
             SpriteInventory = new Inventory(Content.Load<Texture2D>("Inventory/Inventory"), Content.Load<Texture2D>("Inventory/EmptyCell"),
                 Content.Load<Texture2D>("Inventory/BackgroundForText"), Content.Load<Texture2D>("Inventory/MasterKey"), Content.Load<Texture2D>("Inventory/NailPuller"),
@@ -60,10 +63,14 @@ namespace MysteryOfTheDungeon
                 Content.Load<Texture2D>("Inventory/HatInventory"), Content.Load<Texture2D>("Inventory/ShoesInventory"), Content.Load<Texture2D>("Inventory/EmptyOn"),
                 Content.Load<Texture2D>("Inventory/MasterKeyOn"), Content.Load<Texture2D>("Inventory/NailPullerOn"), Content.Load<Texture2D>("Inventory/ShovelInventoryOn"),
                 Content.Load<Texture2D>("Inventory/GoldenKeyInventoryOn"), Content.Load<Texture2D>("Inventory/DressOn"), Content.Load<Texture2D>("Inventory/HatInventoryOn"),
-                Content.Load<Texture2D>("Inventory/ShoesInventoryOn"), Content.Load<Texture2D>("Inventory/FirstRelic"), Content.Load<Texture2D>("Inventory/FirstRelicOn"));
+                Content.Load<Texture2D>("Inventory/ShoesInventoryOn"), Content.Load<Texture2D>("Inventory/FirstRelic"), Content.Load<Texture2D>("Inventory/FirstRelicOn"),
+                Content.Load<Texture2D>("Inventory/SecondRelic"), Content.Load<Texture2D>("Inventory/SecondRelicOn"), Content.Load<Texture2D>("Inventory/BlueKey"),
+                Content.Load<Texture2D>("Inventory/BlueKeyOn"), Content.Load<Texture2D>("Inventory/ThirdRelic"), Content.Load<Texture2D>("Inventory/ThirdRelicOn"));
             SpriteFont = Content.Load<SpriteFont>("Font");
             InteractionManager = new Interaction(Content.Load<Texture2D>("MapTexture/Floor"), Content.Load<Texture2D>("MapTexture/EmptyBasket"), SpriteInventory.CellState,
-                Content.Load<Texture2D>("MapTexture/DressedDummy"), Content.Load<Texture2D>("MapTexture/OpenedDoor"), Content.Load<Texture2D>("MapTexture/OpenedGoldenDoor"));
+                Content.Load<Texture2D>("MapTexture/DressedDummy"), Content.Load<Texture2D>("MapTexture/OpenedDoor"), Content.Load<Texture2D>("MapTexture/OpenedGoldenDoor"),
+                Content.Load<Texture2D>("MapTexture/BrokenBoards"), Content.Load<Texture2D>("MapTexture/ExcavatedSand"), Content.Load<Texture2D>("MapTexture/OpenedBlueDoor"),
+                Content.Load<Texture2D>("MapTexture/DugOutHeap"));
             SpritePlayer = new Player(new Dictionary<string, Animations>()
             {
                 { "GoRight", new Animations(Content.Load<Texture2D>("Player/GoRight"), 3) },
