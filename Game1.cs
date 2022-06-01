@@ -65,12 +65,14 @@ namespace MysteryOfTheDungeon
                 Content.Load<Texture2D>("Inventory/GoldenKeyInventoryOn"), Content.Load<Texture2D>("Inventory/DressOn"), Content.Load<Texture2D>("Inventory/HatInventoryOn"),
                 Content.Load<Texture2D>("Inventory/ShoesInventoryOn"), Content.Load<Texture2D>("Inventory/FirstRelic"), Content.Load<Texture2D>("Inventory/FirstRelicOn"),
                 Content.Load<Texture2D>("Inventory/SecondRelic"), Content.Load<Texture2D>("Inventory/SecondRelicOn"), Content.Load<Texture2D>("Inventory/BlueKey"),
-                Content.Load<Texture2D>("Inventory/BlueKeyOn"), Content.Load<Texture2D>("Inventory/ThirdRelic"), Content.Load<Texture2D>("Inventory/ThirdRelicOn"));
+                Content.Load<Texture2D>("Inventory/BlueKeyOn"), Content.Load<Texture2D>("Inventory/ThirdRelic"), Content.Load<Texture2D>("Inventory/ThirdRelicOn"),
+                Content.Load<Texture2D>("Inventory/PasswordInventory"), Content.Load<Texture2D>("Inventory/PasswordInventoryOn"), Content.Load<Texture2D>("Inventory/FourthRelic"),
+                Content.Load<Texture2D>("Inventory/FourthRelicOn"));
             SpriteFont = Content.Load<SpriteFont>("Font");
             InteractionManager = new Interaction(Content.Load<Texture2D>("MapTexture/Floor"), Content.Load<Texture2D>("MapTexture/EmptyBasket"), SpriteInventory.CellState,
                 Content.Load<Texture2D>("MapTexture/DressedDummy"), Content.Load<Texture2D>("MapTexture/OpenedDoor"), Content.Load<Texture2D>("MapTexture/OpenedGoldenDoor"),
                 Content.Load<Texture2D>("MapTexture/BrokenBoards"), Content.Load<Texture2D>("MapTexture/ExcavatedSand"), Content.Load<Texture2D>("MapTexture/OpenedBlueDoor"),
-                Content.Load<Texture2D>("MapTexture/DugOutHeap"));
+                Content.Load<Texture2D>("MapTexture/DugOutHeap"), Content.Load<Texture2D>("MapTexture/OpenedChest"));
             SpritePlayer = new Player(new Dictionary<string, Animations>()
             {
                 { "GoRight", new Animations(Content.Load<Texture2D>("Player/GoRight"), 3) },

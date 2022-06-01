@@ -25,10 +25,11 @@ namespace MysteryOfTheDungeon
         private Texture2D ExcavatedSandTexture;
         private Texture2D OpenedBlueDoorTexture;
         private Texture2D DugOutHeapTexture;
+        private Texture2D OpenedChestTexture;
 
         public Interaction(Texture2D floorTexture, Texture2D emptyBasketTexture, Dictionary<int, bool> cellState, Texture2D dressedDummyTexture,
             Texture2D openedDoorTexture, Texture2D openedGoldenDoorTexture, Texture2D brokenBoardsTexture, Texture2D excavatedSandTexture,
-            Texture2D openedBlueDoorTexture, Texture2D dugOutHeapTexture)
+            Texture2D openedBlueDoorTexture, Texture2D dugOutHeapTexture, Texture2D openedChestTexture)
         {
             FloorTexture = floorTexture;
             EmptyBasketTexture = emptyBasketTexture;
@@ -55,7 +56,9 @@ namespace MysteryOfTheDungeon
                 [CellType.ClosedBlueDoor] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
                 [CellType.Scroll] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText },
                 [CellType.PileOfStones] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
-                [CellType.HeapWithRelic] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem }
+                [CellType.HeapWithRelic] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
+                [CellType.Password] = new List<Action<SpriteMap, InventoryItems[]>> { FindItem },
+                [CellType.ClosedChest] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem }
             };
             CellState = cellState;
             DressedDummyTexture = dressedDummyTexture;
@@ -65,6 +68,7 @@ namespace MysteryOfTheDungeon
             ExcavatedSandTexture = excavatedSandTexture;
             OpenedBlueDoorTexture = openedBlueDoorTexture;
             DugOutHeapTexture = dugOutHeapTexture;
+            OpenedChestTexture = openedChestTexture;
         }
 
 
@@ -171,6 +175,24 @@ namespace MysteryOfTheDungeon
                         AddToInventory(inventory, InventoryItems.ThirdRelic);
                         interactionCell.Texture = DugOutHeapTexture;
                         interactionCell.Value = CellType.DugOutHeap;
+
+                    }
+                    break;
+                case CellType.Password:
+                    if (!inventory.Contains(InventoryItems.Password))
+                    {
+
+                        AddToInventory(inventory, InventoryItems.Password);
+                        interactionCell.Texture = FloorTexture;
+                        interactionCell.Value = CellType.Floor;
+                    }
+                    break;
+                case CellType.ClosedChest:
+                    if (!inventory.Contains(InventoryItems.FourthRelic))
+                    {
+                        AddToInventory(inventory, InventoryItems.FourthRelic);
+                        interactionCell.Texture = OpenedChestTexture;
+                        interactionCell.Value = CellType.OpenedChest;
 
                     }
                     break;
@@ -307,6 +329,15 @@ namespace MysteryOfTheDungeon
                             "тебя.";
                     }
                     break;
+                case CellType.ClosedChest:
+                    if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.Password))
+                    {
+                        ReplaceInventorySlots(CellState, inventory);
+                        FindItem(interactionCell, inventory);
+                        OutputText = "Мне кажетсся, что это\n" +
+                            "реликвия. Джулия, я спешу к тебе.";
+                    }
+                    break;
                 default:
                     break;
             }
@@ -433,6 +464,10 @@ namespace MysteryOfTheDungeon
                         "используется для хранения\n" +
                         "куч камней. Именно в одну из\n" +
                         "этих куч я и... спрячу реликвию.";
+                    break;
+                case CellType.ClosedChest:
+                    if (!inventory.Contains(InventoryItems.Password))
+                        OutputText = "Хмм... Кодовый замок.";
                     break;
                 default:
                     OutputText = "Я не могу с этим взаимодействовать.";
