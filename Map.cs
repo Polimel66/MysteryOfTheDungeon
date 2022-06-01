@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace MysteryOfTheDungeon
 {
@@ -57,7 +53,12 @@ namespace MysteryOfTheDungeon
         DugOutHeap = 'M',
         HeapWithRelic = 'x',
         Password = 'u',
-        OpenedChest = 'U'
+        OpenedChest = 'U',
+        PedestalWithFirstRelic = 'w',
+        PedestalWithSecondRelic = 'W',
+        PedestalWithThirdRelic = 'y',
+        PedestalWithFourthRelic = 'Y',
+        EnchantedExit = 'X'
     }
 
     class Map
@@ -97,6 +98,7 @@ namespace MysteryOfTheDungeon
         private Texture2D PileOfStonesTexture;
         private Texture2D ScrollTexture;
         private Texture2D PasswordTexture;
+        private Texture2D EnchantedExitTexture;
 
         protected readonly int MapTextureSide = 30;
 
@@ -107,7 +109,7 @@ namespace MysteryOfTheDungeon
             Texture2D brokenvaseTexture, Texture2D shovelTexture, Texture2D basketTexture, Texture2D ambryTexture, Texture2D bookTableTexture,
             Texture2D goldenKeyTexture, Texture2D gritTexture, Texture2D hatTexture, Texture2D shoesTexture, Texture2D closedDoorTexture,
             Texture2D bookOnTableTexture, Texture2D closedGoldenDoorTexture, Texture2D boardsTexture, Texture2D closedBlueDoorTexture,
-            Texture2D pileOfStonesTexture, Texture2D scrollTexture, Texture2D passwordTexture)
+            Texture2D pileOfStonesTexture, Texture2D scrollTexture, Texture2D passwordTexture, Texture2D enchantedExitTexture)
         {
             WallTopTexture = wallTopTexture;
             FloorTexture = floorTexture;
@@ -144,6 +146,7 @@ namespace MysteryOfTheDungeon
             PileOfStonesTexture = pileOfStonesTexture;
             ScrollTexture = scrollTexture;
             PasswordTexture = passwordTexture;
+            EnchantedExitTexture = enchantedExitTexture;
         }
         
         private readonly List<string> MapConstructor = new List<string>
@@ -172,7 +175,7 @@ namespace MysteryOfTheDungeon
             "0ggggggg221122220111111PP110",
             "0gggggggL1111111011111111110",
             "0gfggggg00110001011PP11111P0",
-            "0ggggggg000100010P1P1111mPx0",
+            "0ggggggg001X00010P1P1111mPx0",
             "0000000000000000000000000000"
         };
 
@@ -210,12 +213,12 @@ namespace MysteryOfTheDungeon
                         else if (mapCellValue == 3)
                         {
                             texture = BonfireTexture;
-                            cellType = CellType.Pedestal;
+                            cellType = CellType.Bonfire;
                         }
                         else if (mapCellValue == 4)
                         {
                             texture = PedestalTexture;
-                            cellType = CellType.Bonfire;
+                            cellType = CellType.Pedestal;
                         }
                         else if (mapCellValue == 5)
                         {
@@ -377,6 +380,11 @@ namespace MysteryOfTheDungeon
                     {
                         texture = PasswordTexture;
                         cellType = CellType.Password;
+                    }
+                    else if (mapCell.Equals('X'))
+                    {
+                        texture = EnchantedExitTexture;
+                        cellType = CellType.EnchantedExit;
                     }
                     else
                     {

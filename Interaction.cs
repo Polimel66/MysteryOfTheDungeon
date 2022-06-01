@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
 
 namespace MysteryOfTheDungeon
 {
@@ -15,6 +10,7 @@ namespace MysteryOfTheDungeon
     {
         private Dictionary<CellType, List<Action<SpriteMap, InventoryItems[]>>> InteractionDictionary;
         public string OutputText = "";
+        public int CounterOfRelic = 0;
         public Dictionary<int, bool> CellState;
         private Texture2D FloorTexture;
         private Texture2D EmptyBasketTexture;
@@ -26,10 +22,15 @@ namespace MysteryOfTheDungeon
         private Texture2D OpenedBlueDoorTexture;
         private Texture2D DugOutHeapTexture;
         private Texture2D OpenedChestTexture;
+        private Texture2D PedestalWithFirstRelicTexture;
+        private Texture2D PedestalWithSecondRelicTexture;
+        private Texture2D PedestalWithThirdRelicTexture;
+        private Texture2D PedestalWithFourthRelicTexture;
 
         public Interaction(Texture2D floorTexture, Texture2D emptyBasketTexture, Dictionary<int, bool> cellState, Texture2D dressedDummyTexture,
             Texture2D openedDoorTexture, Texture2D openedGoldenDoorTexture, Texture2D brokenBoardsTexture, Texture2D excavatedSandTexture,
-            Texture2D openedBlueDoorTexture, Texture2D dugOutHeapTexture, Texture2D openedChestTexture)
+            Texture2D openedBlueDoorTexture, Texture2D dugOutHeapTexture, Texture2D openedChestTexture, Texture2D pedestalWithFirstRelicTexture,
+            Texture2D pedestalWithSecondRelicTexture, Texture2D pedestalWithThirdRelicTexture, Texture2D pedestalWithFourthRelicTexture)
         {
             FloorTexture = floorTexture;
             EmptyBasketTexture = emptyBasketTexture;
@@ -58,7 +59,9 @@ namespace MysteryOfTheDungeon
                 [CellType.PileOfStones] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
                 [CellType.HeapWithRelic] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
                 [CellType.Password] = new List<Action<SpriteMap, InventoryItems[]>> { FindItem },
-                [CellType.ClosedChest] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem }
+                [CellType.ClosedChest] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
+                [CellType.Pedestal] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
+                [CellType.EnchantedExit] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem }
             };
             CellState = cellState;
             DressedDummyTexture = dressedDummyTexture;
@@ -69,6 +72,10 @@ namespace MysteryOfTheDungeon
             OpenedBlueDoorTexture = openedBlueDoorTexture;
             DugOutHeapTexture = dugOutHeapTexture;
             OpenedChestTexture = openedChestTexture;
+            PedestalWithFirstRelicTexture = pedestalWithFirstRelicTexture;
+            PedestalWithSecondRelicTexture = pedestalWithSecondRelicTexture;
+            PedestalWithThirdRelicTexture = pedestalWithThirdRelicTexture;
+            PedestalWithFourthRelicTexture = pedestalWithFourthRelicTexture;
         }
 
 
@@ -338,6 +345,45 @@ namespace MysteryOfTheDungeon
                             "реликвия. Джулия, я спешу к тебе.";
                     }
                     break;
+                case CellType.Pedestal:
+                    if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.FirstRelic))
+                    {
+                        ReplaceInventorySlots(CellState, inventory);
+                        interactionCell.Texture = PedestalWithFirstRelicTexture;
+                        interactionCell.Value = CellType.PedestalWithFirstRelic;
+                        CounterOfRelic += 1;
+                    }
+                    else if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.SecondRelic))
+                    {
+                        ReplaceInventorySlots(CellState, inventory);
+                        interactionCell.Texture = PedestalWithSecondRelicTexture;
+                        interactionCell.Value = CellType.PedestalWithSecondRelic;
+                        CounterOfRelic += 1;
+                    }
+                    else if(selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.ThirdRelic))
+                    {
+                        ReplaceInventorySlots(CellState, inventory);
+                        interactionCell.Texture = PedestalWithThirdRelicTexture;
+                        interactionCell.Value = CellType.PedestalWithThirdRelic;
+                        CounterOfRelic += 1;
+                    }
+                    else if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.FourthRelic))
+                    {
+                        ReplaceInventorySlots(CellState, inventory);
+                        interactionCell.Texture = PedestalWithFourthRelicTexture;
+                        interactionCell.Value = CellType.PedestalWithFourthRelic;
+                        CounterOfRelic += 1;
+                    }
+                    if (CounterOfRelic == 4)
+                        OutputText = "Кажется теперь выход открылся!\n" +
+                            "Нужно срочно выбираться отсюда!";
+                    break;
+                    /*
+                case CellType.EnchantedExit:
+                    if (CounterOfRelic == 4)
+                    {
+                    }
+                    break;*/
                 default:
                     break;
             }
@@ -421,7 +467,7 @@ namespace MysteryOfTheDungeon
                 case CellType.Shoes:
                     if (!inventory.Contains(InventoryItems.Shoes))
                         OutputText = "Туфли?! Может всю одежду,\n" +
-                            "которую я нашел можно куда-то надеть?\n" +
+                            "которую я нашел можно куда-то одеть?\n" +
                             "Надо попытаться ее применить.";
                     break;
                 case CellType.ClosedDoor:
@@ -452,7 +498,7 @@ namespace MysteryOfTheDungeon
                             "проломить.";
                     break;
                 case CellType.Scroll:
-                    OutputText = "-Я нашла лишь одну релик\n" +
+                    OutputText = "-Я нашла лишь одну релик-\n" +
                         "вию. Где спрятаны остальные -\n" +
                         "представить не могу. Я больше\n" +
                         "не буду пытаться выбраться\n" +
@@ -468,6 +514,12 @@ namespace MysteryOfTheDungeon
                 case CellType.ClosedChest:
                     if (!inventory.Contains(InventoryItems.Password))
                         OutputText = "Хмм... Кодовый замок.";
+                    break;
+                case CellType.EnchantedExit:
+                    if (CounterOfRelic < 4)
+                        OutputText = "Выход заколдован, нужно\n" +
+                            "постараться найти способ\n" +
+                            "его открыть.";
                     break;
                 default:
                     OutputText = "Я не могу с этим взаимодействовать.";

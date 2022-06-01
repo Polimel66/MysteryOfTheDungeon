@@ -440,6 +440,12 @@
 /processorParam:TextureFormat=Color
 /build:Inventory/ThirdRelicOn.png
 
+#begin Lamp.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Lamp.fx
+
 #begin MapTexture/Ambry.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -704,6 +710,18 @@
 /processorParam:TextureFormat=Color
 /build:MapTexture/EmptyBasket.png
 
+#begin MapTexture/EnchantedExit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/EnchantedExit.png
+
 #begin MapTexture/ExcavatedSand.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -847,6 +865,54 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MapTexture/Pedestal.png
+
+#begin MapTexture/PedestalWithFirstRelic.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/PedestalWithFirstRelic.png
+
+#begin MapTexture/PedestalWithFourthRelic.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/PedestalWithFourthRelic.png
+
+#begin MapTexture/PedestalWithSecondRelic.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/PedestalWithSecondRelic.png
+
+#begin MapTexture/PedestalWithThirdRelic.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapTexture/PedestalWithThirdRelic.png
 
 #begin MapTexture/PileOfStones.png
 /importer:TextureImporter

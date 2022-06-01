@@ -17,6 +17,8 @@ namespace MysteryOfTheDungeon
         private Bonfire SpriteBonfire;
         private Inventory SpriteInventory;
         private SpriteFont SpriteFont;
+        RenderTarget2D target;
+        Effect LampEffectPlayer;
 
         public Game1()
         {
@@ -30,6 +32,7 @@ namespace MysteryOfTheDungeon
             graphics.PreferredBackBufferWidth = 30 * 27 + 30 + 407;
             graphics.PreferredBackBufferHeight = 30 * 26;
             graphics.IsFullScreen = false;
+            target = new RenderTarget2D(GraphicsDevice, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             graphics.ApplyChanges();
             base.Initialize();
         }
@@ -55,7 +58,7 @@ namespace MysteryOfTheDungeon
                 Content.Load<Texture2D>("MapTexture/BookOnTable"), Content.Load<Texture2D>("MapTexture/ClosedGoldenDoor"),
                 Content.Load<Texture2D>("MapTexture/Boards"), Content.Load<Texture2D>("MapTexture/ClosedBlueDoor"),
                 Content.Load<Texture2D>("MapTexture/PileOfStones"), Content.Load<Texture2D>("MapTexture/Scroll"),
-                Content.Load<Texture2D>("MapTexture/Password"));
+                Content.Load<Texture2D>("MapTexture/Password"), Content.Load<Texture2D>("MapTexture/EnchantedExit"));
             Map = MapConstructor.GenerateMap();
             SpriteInventory = new Inventory(Content.Load<Texture2D>("Inventory/Inventory"), Content.Load<Texture2D>("Inventory/EmptyCell"),
                 Content.Load<Texture2D>("Inventory/BackgroundForText"), Content.Load<Texture2D>("Inventory/MasterKey"), Content.Load<Texture2D>("Inventory/NailPuller"),
@@ -72,7 +75,8 @@ namespace MysteryOfTheDungeon
             InteractionManager = new Interaction(Content.Load<Texture2D>("MapTexture/Floor"), Content.Load<Texture2D>("MapTexture/EmptyBasket"), SpriteInventory.CellState,
                 Content.Load<Texture2D>("MapTexture/DressedDummy"), Content.Load<Texture2D>("MapTexture/OpenedDoor"), Content.Load<Texture2D>("MapTexture/OpenedGoldenDoor"),
                 Content.Load<Texture2D>("MapTexture/BrokenBoards"), Content.Load<Texture2D>("MapTexture/ExcavatedSand"), Content.Load<Texture2D>("MapTexture/OpenedBlueDoor"),
-                Content.Load<Texture2D>("MapTexture/DugOutHeap"), Content.Load<Texture2D>("MapTexture/OpenedChest"));
+                Content.Load<Texture2D>("MapTexture/DugOutHeap"), Content.Load<Texture2D>("MapTexture/OpenedChest"), Content.Load<Texture2D>("MapTexture/PedestalWithFirstRelic"),
+                Content.Load<Texture2D>("MapTexture/PedestalWithSecondRelic"), Content.Load<Texture2D>("MapTexture/PedestalWithThirdRelic"), Content.Load<Texture2D>("MapTexture/PedestalWithFourthRelic"));
             SpritePlayer = new Player(new Dictionary<string, Animations>()
             {
                 { "GoRight", new Animations(Content.Load<Texture2D>("Player/GoRight"), 3) },
@@ -83,7 +87,7 @@ namespace MysteryOfTheDungeon
                 PositionValue = new Vector2(60, 60),
                 Speed = 2f
             };
-            
+            LampEffectPlayer = Content.Load<Effect>("Lamp");
         }
 
         protected override void UnloadContent()
@@ -105,13 +109,26 @@ namespace MysteryOfTheDungeon
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.SetRenderTarget(target);
+            GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            spriteBatch.Begin();
             MapConstructor.Draw(spriteBatch, Map);
-            SpriteInventory.Draw(spriteBatch, SpriteFont, InteractionManager.OutputText);
             SpriteBonfire.Draw(spriteBatch);
             SpritePlayer.Draw(spriteBatch);
+            spriteBatch.End();
+
+            GraphicsDevice.SetRenderTarget(null);
+            GraphicsDevice.Clear(Color.Black);
+            
+            LampEffectPlayer.Parameters["position"].SetValue(new Vector2(SpritePlayer.PlayerGlowCoordinates.Item1,
+                SpritePlayer.PlayerGlowCoordinates.Item2));
+            spriteBatch.Begin(0, BlendState.AlphaBlend, null, null, null, LampEffectPlayer);
+            spriteBatch.Draw(target, Vector2.Zero, Color.White);
+            spriteBatch.End();
+            
+            spriteBatch.Begin();
+            SpriteInventory.Draw(spriteBatch, SpriteFont, InteractionManager.OutputText);
             spriteBatch.End();
             base.Draw(gameTime);
         }

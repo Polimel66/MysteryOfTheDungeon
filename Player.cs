@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,14 +17,17 @@ namespace MysteryOfTheDungeon
         protected int MapTextureSide = 30;
         public Vector2 PositionValue;
         public float Speed;
-        protected List<CellType> CollisionTextures = new List<CellType>() 
-        { 
+        public (float, float) PlayerGlowCoordinates = (0, 0);
+
+        protected List<CellType> CollisionTextures = new List<CellType>()
+        {
             CellType.Bonfire, CellType.WallFront, CellType.WallTop,
-            CellType.Pedestal, CellType.BedsideTable, CellType.TableWithBook, CellType.BedTop, CellType.BedBottom, CellType.Dummy, 
+            CellType.Pedestal, CellType.BedsideTable, CellType.TableWithBook, CellType.BedTop, CellType.BedBottom, CellType.Dummy,
             CellType.Vase, CellType.ClosedChest, CellType.Bake, CellType.KitchenTable, CellType.Tabletop, CellType.Sink, CellType.Chair,
-            CellType.DinnerTable, CellType.BrokenVase, CellType.Basket, CellType.Ambry, CellType.BookTable, CellType.EmptyBasket, 
+            CellType.DinnerTable, CellType.BrokenVase, CellType.Basket, CellType.Ambry, CellType.BookTable, CellType.EmptyBasket,
             CellType.DressedDummy, CellType.ClosedDoor, CellType.BookOnTable, CellType.ClosedGoldenDoor, CellType.Boards, CellType.ClosedBlueDoor,
-            CellType.PileOfStones, CellType.Scroll
+            CellType.PileOfStones, CellType.Scroll, CellType.PedestalWithFirstRelic, CellType.PedestalWithSecondRelic, CellType.PedestalWithThirdRelic,
+            CellType.PedestalWithFourthRelic, CellType.EnchantedExit
         };
 
         public Player(Dictionary<string, Animations> animationsDictionary, Interaction interactionManager, Inventory inventory)
@@ -104,28 +104,6 @@ namespace MysteryOfTheDungeon
 
         public List<SpriteMap> GenerateInteractionCells(int positionX, int positionY, SpriteMap[,] map)
         {
-            /*
-            var shift = new List<int>() { 1, -1 };
-            var result = new List<(int, int)>() { (positionX - 1, positionY - 1) };
-            for (int i = 0; i < 2; i++)
-            {
-                if (i == 0)
-                {
-                    foreach (var j in shift)
-                    {
-                        // -1 в каждой координате тк отсчёт в массиве с 0
-                        if (positionX + j - 1 > 0 && positionX + j - 1 < 27)
-                            result.Add(((positionX + j) - 1, positionY - 1));
-                    }
-                }
-                else
-                {
-                    foreach (var j in shift)
-                    {
-                        if (positionY + j - 1 > 0 && positionY + j - 1 < 28)
-                            result.Add((positionX - 1, (positionY + j) - 1));
-                    }
-                }*/
                 //генерация такая, потому что нужно проверять не выходит ли индекс массива за пределы
                 var shift = new List<int>() { 1, -1 };
                 var result = new List<SpriteMap>() { map[positionX - 1, positionY - 1] };
@@ -196,6 +174,14 @@ namespace MysteryOfTheDungeon
             
             AnimationManager.Update(gameTime);
             AnimationManager.Position = PositionValue;
+            PlayerGlowCoordinates = DrawLight();
+        }
+
+        public (float, float) DrawLight()
+        {
+            float posx = (float)(PositionValue.X + TextureWidth / 2) / (30 * 27 + 30 + 407);
+            float posy = (float)(PositionValue.Y + TextureHight / 2) / (30 * 26);
+            return (posx, posy);  
         }
 
         public void Draw(SpriteBatch spriteBatch)
