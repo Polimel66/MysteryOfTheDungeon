@@ -18,6 +18,8 @@ namespace MysteryOfTheDungeon
         public Vector2 PositionValue;
         public float Speed;
         public (float, float) PlayerGlowCoordinates = (0, 0);
+        private readonly int ScreenWidth = 1247;
+        private readonly int ScreenHeight = 780;
 
         protected List<CellType> CollisionTextures = new List<CellType>()
         {
@@ -187,8 +189,8 @@ namespace MysteryOfTheDungeon
 
         public (float, float) DrawLight()
         {
-            float posx = (float)(PositionValue.X + TextureWidth / 2) / (30 * 27 + 30 + 407);
-            float posy = (float)(PositionValue.Y + TextureHight / 2) / (30 * 26);
+            float posx = (float)(PositionValue.X + TextureWidth / 2) / ScreenWidth;
+            float posy = (float)(PositionValue.Y + TextureHight / 2) / ScreenHeight;
             return (posx, posy);  
         }
 

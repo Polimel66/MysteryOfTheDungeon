@@ -63,6 +63,7 @@ namespace MysteryOfTheDungeon
         private Texture2D PasswordOnTexture;
         private Texture2D FourthRelicTexture;
         private Texture2D FourthRelicOnTexture;
+        private readonly int LeftBorderInventory = 875;
 
         public Inventory(Texture2D inventoryTexture, Texture2D emptyTexture, Texture2D backgroundForTextTexture,
             Texture2D masterKeyTexture, Texture2D nailPullerTexture, Texture2D shovelTexture, Texture2D goldenKeyTexture,
@@ -217,7 +218,7 @@ namespace MysteryOfTheDungeon
                 {
                     lineCounter += 1;
                     position.Y += CellSize;
-                    position.X = 875; // высчитанная координата для отрисовки инвентаря
+                    position.X = LeftBorderInventory; // высчитанная координата для отрисовки инвентаря
                     columnCounter = 0;
                 }
                 else
