@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MysteryOfTheDungeon
 {
-
     class Interaction
     {
         private Dictionary<CellType, List<Action<SpriteMap, InventoryItems[]>>> InteractionDictionary;
@@ -254,7 +253,8 @@ namespace MysteryOfTheDungeon
                     {
                         ReplaceInventorySlots(CellState, inventory);
                         FindItem(interactionCell, inventory);
-                        OutputText = "Реликвия! Я приближаюсь к выходу...";
+                        OutputText = "Эрик:\n\n" + 
+                            "Реликвия! Я приближаюсь к выходу...";
                     }
                     break;
                 case CellType.ClosedDoor:
@@ -263,7 +263,8 @@ namespace MysteryOfTheDungeon
                         ReplaceInventorySlots(CellState, inventory);
                         interactionCell.Texture = OpenedDoorTexture;
                         interactionCell.Value = CellType.OpenedDoor;
-                        OutputText = "Открыл! Надеюсь еще не поздно\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Открыл! Надеюсь еще не поздно\n" +
                             "помочь этой бедняге...";
                     }
                     break;
@@ -273,7 +274,8 @@ namespace MysteryOfTheDungeon
                         ReplaceInventorySlots(CellState, inventory);
                         interactionCell.Texture = OpenedGoldenDoorTexture;
                         interactionCell.Value = CellType.OpenedGoldenDoor;
-                        OutputText = "Ключ подошел! Отлично,\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Ключ подошел! Отлично,\n" +
                             "двигаемся дальше.";
                     }
                     break;
@@ -283,7 +285,8 @@ namespace MysteryOfTheDungeon
                         ReplaceInventorySlots(CellState, inventory);
                         interactionCell.Texture = BrokenBoardsTexture;
                         interactionCell.Value = CellType.BrokenBoards;
-                        OutputText = "Фух, надеюсь маг не очень\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Фух, надеюсь маг не очень\n" +
                             "будет злиться из-за поломки.";
                     }
                     break;
@@ -298,7 +301,8 @@ namespace MysteryOfTheDungeon
                     if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.Shovel))
                     {
                         FindItem(interactionCell, inventory);
-                        OutputText = "Синий ключ! Я могу проникнуть\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Синий ключ! Я могу проникнуть\n" +
                             "в последнюю комнату.";
                     }
                     break;
@@ -306,7 +310,8 @@ namespace MysteryOfTheDungeon
                     if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.Shovel))
                     {
                         FindItem(interactionCell, inventory);
-                        OutputText = "Реликвия! Еще немного\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Реликвия! Еще немного\n" +
                             "и я выберусь отсюда, и помогу\n" +
                             "этой бедной девушке.";
                     }
@@ -317,7 +322,8 @@ namespace MysteryOfTheDungeon
                         ReplaceInventorySlots(CellState, inventory);
                         interactionCell.Texture = OpenedBlueDoorTexture;
                         interactionCell.Value = CellType.OpenedBlueDoor;
-                        OutputText = "Еще одна дверь открыта.";
+                        OutputText = "Эрик:\n\n" + 
+                            "Еще одна дверь открыта.";
                     }
                     break;
                 case CellType.PileOfStones:
@@ -331,7 +337,8 @@ namespace MysteryOfTheDungeon
                     if (selectedСells.Count == 1 && selectedСells.Contains(InventoryItems.Shovel))
                     {
                         FindItem(interactionCell, inventory);
-                        OutputText = "Еще одна реликвия!\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Еще одна реликвия!\n" +
                             "Держись Джулия, я скоро спасу\n" +
                             "тебя.";
                     }
@@ -341,7 +348,8 @@ namespace MysteryOfTheDungeon
                     {
                         ReplaceInventorySlots(CellState, inventory);
                         FindItem(interactionCell, inventory);
-                        OutputText = "Мне кажетсся, что это\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Мне кажетсся, что это\n" +
                             "реликвия. Джулия, я спешу к тебе.";
                     }
                     break;
@@ -375,15 +383,28 @@ namespace MysteryOfTheDungeon
                         CounterOfRelic += 1;
                     }
                     if (CounterOfRelic == 4)
-                        OutputText = "Кажется теперь выход открылся!\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Кажется теперь выход открылся!\n" +
                             "Нужно срочно выбираться отсюда!";
                     break;
-                    /*
+                    
                 case CellType.EnchantedExit:
                     if (CounterOfRelic == 4)
                     {
+                        OutputText = "Эрик спустился по лестнице\n" +
+                            "и увидел прекрасную девушку\n" +
+                            "лежащую на холодном полу\n" +
+                            "темницы. Он мгновенно подбежал\n" +
+                            " к ней. Она дышала. Эрик подхва-\n" +
+                            "тил ее и выбежал через недавно\n" +
+                            "открывшийся выход. Холодные\n" +
+                            "лучи луны коснулись лица\n" +
+                            "девушки, и она очнулась.\n" +
+                            "С тех пор Эрик и Джулия\n" +
+                            "жили вместе долго и счаст-\n" +
+                            "ливо! Конец.";
                     }
-                    break;*/
+                    break;
                 default:
                     break;
             }
@@ -395,7 +416,8 @@ namespace MysteryOfTheDungeon
             switch (interactionSubject)
             {
                 case CellType.TableWithBook:
-                    OutputText = "-Идет тридцать пятая неделя моего\n" +
+                    OutputText = "Неопознанный писатель:\n\n" +
+                        "Идет тридцать пятая неделя моего\n" +
                         "заточения. Я уже не надеюсь на\n" +
                         "спасение. Злой маг похитил меня\n" +
                         "и оставил существовать в этом\n" +
@@ -408,7 +430,8 @@ namespace MysteryOfTheDungeon
                         "Джулия.";
                     break;
                 case CellType.BookTable:
-                    OutputText = "-Я редко выбираюсь на\n" +
+                    OutputText = "Джулия:\n\n" + 
+                        "Я редко выбираюсь на\n" +
                         "кухню. Боюсь, что маг меня пой-\n" +
                         "мает. Но иногда, голод берет\n" +
                         "свое. Я съедаю крошки и объедки,\n" +
@@ -417,65 +440,77 @@ namespace MysteryOfTheDungeon
                         "смогу продержаться...";
                     break;
                 case CellType.BedsideTable:
-                    OutputText = "Я ничего не нашел. Нужно поискать\n" +
+                    OutputText = "Эрик:\n\n" +
+                        "Я ничего не нашел. Нужно поискать\n" +
                         "в другом месте.";
                     break;
                 case CellType.Vase:
                     if (!inventory.Contains(InventoryItems.MasterKey))
-                        OutputText = "Я нашел отмычку! Попробую\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Я нашел отмычку! Попробую\n" +
                             "открыть с помощью нее дверь.";
                     break;
                 case CellType.Dummy:
                     if (!(inventory.Contains(InventoryItems.Hat))
                         && !inventory.Contains(InventoryItems.Dress)
                         && !inventory.Contains(InventoryItems.Shoes))
-                        OutputText = "Странный манекен. Думаю\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Странный манекен. Думаю\n" +
                             "с ним можно будет что-то сделать.";
                     break;
                 case CellType.Ambry:
-                    OutputText = "Я ничего не нашел. Нужно поискать\n" +
+                    OutputText = "Эрик:\n\n" + 
+                        "Я ничего не нашел. Нужно поискать\n" +
                         "в другом месте.";
                     break;
                 case CellType.BrokenVase:
                     if (!inventory.Contains(InventoryItems.NailPuller))
-                        OutputText = "Я нашел гвоздодер! Думаю\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Я нашел гвоздодер! Думаю\n" +
                             "он может пригодиться в этом ужасном\n" +
                             "месте.";
                     break;
                 case CellType.Shovel:
                     if (!inventory.Contains(InventoryItems.Shovel))
-                        OutputText = "Я нашел лопату! Думаю\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Я нашел лопату! Думаю\n" +
                             "она может пригодиться в этой тем-\n" +
                             "нице.";
                     break;
                 case CellType.GoldenKey:
                     if (!inventory.Contains(InventoryItems.GoldenKey))
-                        OutputText = "Я нашел золотой ключ!\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Я нашел золотой ключ!\n" +
                             "Вероятно я могу открыть какую-то\n" +
                             "дверь.";
                     break;
                 case CellType.Basket:
                     if (!inventory.Contains(InventoryItems.Dress))
-                        OutputText = "Хмм... Платье.\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Хмм... Платье.\n" +
                             "Возьму его, вдруг пригодится!";
                     break;
                 case CellType.Hat:
                     if (!inventory.Contains(InventoryItems.Hat))
-                        OutputText = "Еще один предмет одежды...\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Еще один предмет одежды...\n" +
                             "Шляпка наверняка нужна. Заберу ее.";
                     break;
                 case CellType.Shoes:
                     if (!inventory.Contains(InventoryItems.Shoes))
-                        OutputText = "Туфли?! Может всю одежду,\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Туфли?! Может всю одежду,\n" +
                             "которую я нашел можно куда-то одеть?\n" +
                             "Надо попытаться ее применить.";
                     break;
                 case CellType.ClosedDoor:
                     if (!inventory.Contains(InventoryItems.MasterKey))
-                        OutputText = "Заперто.";
+                        OutputText = "Эрик:\n\n" + 
+                            "Заперто.";
                     break;
                 case CellType.BookOnTable:
-                    OutputText = "-Я изучала всю темницу пока\n" +
+                    OutputText = "Джулия:\n\n" + 
+                        "Я изучала всю темницу пока\n" +
                         "маг спал. Вчера нашла старые\n" +
                         "свитки в ящике. Там сказано, что\n" +
                         "в этом месте есть лишь один выход.\n" +
@@ -485,20 +520,24 @@ namespace MysteryOfTheDungeon
                     break;
                 case CellType.ClosedGoldenDoor:
                     if (!inventory.Contains(InventoryItems.GoldenKey))
-                        OutputText = "Заперто. Надо найти ключ.";
+                        OutputText = "Эрик:\n\n" + 
+                            "Заперто. Надо найти ключ.";
                     break;
                 case CellType.ClosedBlueDoor:
                     if (!inventory.Contains(InventoryItems.BlueKey))
-                        OutputText = "Закрыто.";
+                        OutputText = "Эрик:\n\n" + 
+                            "Закрыто.";
                     break;
                 case CellType.Boards:
                     if (!inventory.Contains(InventoryItems.NailPuller))
-                        OutputText = "Проход забит досками.\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Проход забит досками.\n" +
                             "Но я думаю, что его можно чем-то\n" +
                             "проломить.";
                     break;
                 case CellType.Scroll:
-                    OutputText = "-Я нашла лишь одну релик-\n" +
+                    OutputText = "Джулия:\n\n" + 
+                        "Я нашла лишь одну релик-\n" +
                         "вию. Где спрятаны остальные -\n" +
                         "представить не могу. Я больше\n" +
                         "не буду пытаться выбраться\n" +
@@ -513,16 +552,19 @@ namespace MysteryOfTheDungeon
                     break;
                 case CellType.ClosedChest:
                     if (!inventory.Contains(InventoryItems.Password))
-                        OutputText = "Хмм... Кодовый замок.";
+                        OutputText = "Эрик:\n\n" + 
+                            "Хмм... Кодовый замок.";
                     break;
                 case CellType.EnchantedExit:
                     if (CounterOfRelic < 4)
-                        OutputText = "Выход заколдован, нужно\n" +
+                        OutputText = "Эрик:\n\n" + 
+                            "Выход заколдован, нужно\n" +
                             "постараться найти способ\n" +
                             "его открыть.";
                     break;
                 default:
-                    OutputText = "Я не могу с этим взаимодействовать.";
+                    OutputText = "Эрик:\n\n" + 
+                        "Я не могу с этим взаимодействовать.";
                     break; 
             }
             

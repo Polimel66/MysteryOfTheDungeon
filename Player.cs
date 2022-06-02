@@ -71,8 +71,9 @@ namespace MysteryOfTheDungeon
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                var playerCellPositionX = (int)((PositionValue.X + (TextureWidth / 2)) / MapTextureSide + 1);
-                var playerCellPositionY = (int)((PositionValue.Y + TextureWidth) / MapTextureSide + 1);
+                var cellPosition = FindCellCoordinate(PositionValue, (TextureWidth, TextureHight), MapTextureSide);
+                var playerCellPositionX = cellPosition.Item1;
+                var playerCellPositionY = cellPosition.Item2;
 
                 var interactionCells = GenerateInteractionCells(playerCellPositionX, playerCellPositionY, Map);
                 foreach (var cell in interactionCells)
@@ -100,6 +101,13 @@ namespace MysteryOfTheDungeon
             }
             PositionValue.X += dx;
             PositionValue.Y += dy;
+        }
+
+        public (int, int) FindCellCoordinate(Vector2 position, (int, int) playerTextureDimensions, int mapTextureSide)
+        {
+            var playerCellPositionX = (int)((position.X + (playerTextureDimensions.Item1 / 2)) / mapTextureSide + 1);
+            var playerCellPositionY = (int)((position.Y + playerTextureDimensions.Item2) / mapTextureSide + 1);
+            return (playerCellPositionX, playerCellPositionY);
         }
 
         public List<SpriteMap> GenerateInteractionCells(int positionX, int positionY, SpriteMap[,] map)

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Media;
 
 namespace MysteryOfTheDungeon
 {
@@ -17,8 +18,9 @@ namespace MysteryOfTheDungeon
         private Bonfire SpriteBonfire;
         private Inventory SpriteInventory;
         private SpriteFont SpriteFont;
-        RenderTarget2D target;
-        Effect LampEffectPlayer;
+        private RenderTarget2D Target;
+        private Effect LampEffectPlayer;
+        private Song Music;
 
         public Game1()
         {
@@ -29,10 +31,10 @@ namespace MysteryOfTheDungeon
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = 30 * 27 + 30 + 407;
-            graphics.PreferredBackBufferHeight = 30 * 26;
+            graphics.PreferredBackBufferWidth = 1247;
+            graphics.PreferredBackBufferHeight = 780;
             graphics.IsFullScreen = false;
-            target = new RenderTarget2D(GraphicsDevice, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            Target = new RenderTarget2D(GraphicsDevice, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             graphics.ApplyChanges();
             base.Initialize();
         }
@@ -88,6 +90,10 @@ namespace MysteryOfTheDungeon
                 Speed = 2f
             };
             LampEffectPlayer = Content.Load<Effect>("Lamp");
+            Music = Content.Load<Song>("Music");
+            MediaPlayer.Play(Music);
+            MediaPlayer.Volume = (float)0.05;
+            MediaPlayer.IsRepeating = true;
         }
 
         protected override void UnloadContent()
@@ -100,8 +106,8 @@ namespace MysteryOfTheDungeon
             KeyboardState keyboardState = Keyboard.GetState();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.Escape))
                 Exit();
+            
             SpriteBonfire.Update(gameTime);
-
             SpritePlayer.Update(gameTime, Map);
             SpriteInventory.Update();
             base.Update(gameTime);
@@ -109,7 +115,7 @@ namespace MysteryOfTheDungeon
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.SetRenderTarget(target);
+            GraphicsDevice.SetRenderTarget(Target);
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
@@ -124,7 +130,7 @@ namespace MysteryOfTheDungeon
             LampEffectPlayer.Parameters["position"].SetValue(new Vector2(SpritePlayer.PlayerGlowCoordinates.Item1,
                 SpritePlayer.PlayerGlowCoordinates.Item2));
             spriteBatch.Begin(0, BlendState.AlphaBlend, null, null, null, LampEffectPlayer);
-            spriteBatch.Draw(target, Vector2.Zero, Color.White);
+            spriteBatch.Draw(Target, Vector2.Zero, Color.White);
             spriteBatch.End();
             
             spriteBatch.Begin();

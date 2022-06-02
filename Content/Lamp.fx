@@ -12,10 +12,9 @@ sampler  ColorSampler  : register(s0);
 
 float4 MainPS(float2 TexCoords : TEXCOORD0) : COLOR
 {
-		   float d = distance(TexCoords, position) * 13; //расстоние умноженное на подобранный коэффицент
-		   float4 color = tex2D(ColorSampler, TexCoords); // значение данных текстуры, ColorSampler - Состояние выборки,
-		   //TexCoords - координата текcтуры
-		   color = lerp(color, float4(0,0,0,1), d); // Выполняет линейную интерполяцию между двумя векторами на основе заданного взвешивания.
+		   float d = distance(TexCoords, position) * 15;
+		   float4 color = tex2D(ColorSampler, TexCoords);
+		   color = lerp(color, float4(0,0,0,1), d);
 	 return color;
 }
 
