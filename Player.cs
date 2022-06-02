@@ -41,7 +41,7 @@ namespace MysteryOfTheDungeon
 
         #region Move
 
-        public void Move(SpriteMap[,] Map)
+        public void Move(Sprite[,] Map)
         {
             float dx = 0;
             float dy = 0;
@@ -110,11 +110,11 @@ namespace MysteryOfTheDungeon
             return (playerCellPositionX, playerCellPositionY);
         }
 
-        public List<SpriteMap> GenerateInteractionCells(int positionX, int positionY, SpriteMap[,] map)
+        public List<Sprite> GenerateInteractionCells(int positionX, int positionY, Sprite[,] map)
         {
                 //генерация такая, потому что нужно проверять не выходит ли индекс массива за пределы
                 var shift = new List<int>() { 1, -1 };
-                var result = new List<SpriteMap>() { map[positionX - 1, positionY - 1] };
+                var result = new List<Sprite>() { map[positionX - 1, positionY - 1] };
                 for(int i = 0; i < 2; i++)
                 {
                     if (i == 0)
@@ -142,7 +142,7 @@ namespace MysteryOfTheDungeon
 
         #region Collisions
 
-        protected bool IsTouchingLeft(SpriteMap spriteMap, float dx)
+        protected bool IsTouchingLeft(Sprite spriteMap, float dx)
         {
             var mapTextureSide = spriteMap.Texture.Width;
             // проверка левого нижнего угла текстуры персонажа
@@ -152,7 +152,7 @@ namespace MysteryOfTheDungeon
                 >= spriteMap.Position.Y && playerY <= spriteMap.Position.Y + mapTextureSide && CollisionTextures.Contains(spriteMap.Value);
         }
 
-        protected bool IsTouchingRight(SpriteMap spriteMap, float dx)
+        protected bool IsTouchingRight(Sprite spriteMap, float dx)
         {
             var mapTextureSide = spriteMap.Texture.Width;
             // проверка правого нижнего угла текстуры персонажа
@@ -162,7 +162,7 @@ namespace MysteryOfTheDungeon
                 >= spriteMap.Position.Y && playerY <= spriteMap.Position.Y + mapTextureSide && CollisionTextures.Contains(spriteMap.Value);
         }
 
-        protected bool IsTouchingTopOrBottom(SpriteMap spriteMap, float dy)
+        protected bool IsTouchingTopOrBottom(Sprite spriteMap, float dy)
         {
             var mapTextureSide = spriteMap.Texture.Width;
             // проверка и левого, и правого нижних углов текстуры
@@ -176,7 +176,7 @@ namespace MysteryOfTheDungeon
 
         #endregion
 
-        public void Update(GameTime gameTime, SpriteMap[,] Map)
+        public void Update(GameTime gameTime, Sprite[,] Map)
         {
             Move(Map);
             

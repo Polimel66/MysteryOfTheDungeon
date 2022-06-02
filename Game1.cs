@@ -13,7 +13,7 @@ namespace MysteryOfTheDungeon
         SpriteBatch spriteBatch;
         private Interaction InteractionManager;
         private Map MapConstructor;
-        private SpriteMap[,] Map;
+        private Sprite[,] Map;
         private Player SpritePlayer;
         private Bonfire SpriteBonfire;
         private Inventory SpriteInventory;

@@ -84,7 +84,7 @@
     <Compile Include="Interaction.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="MouseHandling.cs" />
-    <Compile Include="SpriteMap.cs" />
+    <Compile Include="Sprite.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Models\Animations.cs" />
     <Compile Include="Player.cs" />

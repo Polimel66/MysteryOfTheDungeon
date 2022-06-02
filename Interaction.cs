@@ -7,7 +7,7 @@ namespace MysteryOfTheDungeon
 {
     class Interaction
     {
-        private Dictionary<CellType, List<Action<SpriteMap, InventoryItems[]>>> InteractionDictionary;
+        private Dictionary<CellType, List<Action<Sprite, InventoryItems[]>>> InteractionDictionary;
         public string OutputText = "";
         public int CounterOfRelic = 0;
         public Dictionary<int, bool> CellState;
@@ -33,34 +33,34 @@ namespace MysteryOfTheDungeon
         {
             FloorTexture = floorTexture;
             EmptyBasketTexture = emptyBasketTexture;
-            InteractionDictionary = new Dictionary<CellType, List<Action<SpriteMap, InventoryItems[]>>>()
-            { [CellType.TableWithBook] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText },
-                [CellType.BookTable] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText },
-                [CellType.BedsideTable] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText },
-                [CellType.Vase] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
-                [CellType.Dummy] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
-                [CellType.Ambry] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText },
-                [CellType.BrokenVase] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
-                [CellType.Shovel] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
-                [CellType.GoldenKey] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
-                [CellType.Basket] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
-                [CellType.Hat] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
-                [CellType.Shoes] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, FindItem },
-                [CellType.ClosedDoor] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
-                [CellType.BookOnTable] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText },
-                [CellType.ClosedGoldenDoor] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
-                [CellType.Boards] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
-                [CellType.Grit] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
-                [CellType.SandWithBlueKey] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
-                [CellType.SandWithRelic] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
-                [CellType.ClosedBlueDoor] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
-                [CellType.Scroll] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText },
-                [CellType.PileOfStones] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
-                [CellType.HeapWithRelic] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
-                [CellType.Password] = new List<Action<SpriteMap, InventoryItems[]>> { FindItem },
-                [CellType.ClosedChest] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem },
-                [CellType.Pedestal] = new List<Action<SpriteMap, InventoryItems[]>> { UseItem },
-                [CellType.EnchantedExit] = new List<Action<SpriteMap, InventoryItems[]>> { PrintText, UseItem }
+            InteractionDictionary = new Dictionary<CellType, List<Action<Sprite, InventoryItems[]>>>()
+            { [CellType.TableWithBook] = new List<Action<Sprite, InventoryItems[]>> { PrintText },
+                [CellType.BookTable] = new List<Action<Sprite, InventoryItems[]>> { PrintText },
+                [CellType.BedsideTable] = new List<Action<Sprite, InventoryItems[]>> { PrintText },
+                [CellType.Vase] = new List<Action<Sprite, InventoryItems[]>> { PrintText, FindItem },
+                [CellType.Dummy] = new List<Action<Sprite, InventoryItems[]>> { PrintText, UseItem },
+                [CellType.Ambry] = new List<Action<Sprite, InventoryItems[]>> { PrintText },
+                [CellType.BrokenVase] = new List<Action<Sprite, InventoryItems[]>> { PrintText, FindItem },
+                [CellType.Shovel] = new List<Action<Sprite, InventoryItems[]>> { PrintText, FindItem },
+                [CellType.GoldenKey] = new List<Action<Sprite, InventoryItems[]>> { PrintText, FindItem },
+                [CellType.Basket] = new List<Action<Sprite, InventoryItems[]>> { PrintText, FindItem },
+                [CellType.Hat] = new List<Action<Sprite, InventoryItems[]>> { PrintText, FindItem },
+                [CellType.Shoes] = new List<Action<Sprite, InventoryItems[]>> { PrintText, FindItem },
+                [CellType.ClosedDoor] = new List<Action<Sprite, InventoryItems[]>> { PrintText, UseItem },
+                [CellType.BookOnTable] = new List<Action<Sprite, InventoryItems[]>> { PrintText },
+                [CellType.ClosedGoldenDoor] = new List<Action<Sprite, InventoryItems[]>> { PrintText, UseItem },
+                [CellType.Boards] = new List<Action<Sprite, InventoryItems[]>> { PrintText, UseItem },
+                [CellType.Grit] = new List<Action<Sprite, InventoryItems[]>> { UseItem },
+                [CellType.SandWithBlueKey] = new List<Action<Sprite, InventoryItems[]>> { UseItem },
+                [CellType.SandWithRelic] = new List<Action<Sprite, InventoryItems[]>> { UseItem },
+                [CellType.ClosedBlueDoor] = new List<Action<Sprite, InventoryItems[]>> { PrintText, UseItem },
+                [CellType.Scroll] = new List<Action<Sprite, InventoryItems[]>> { PrintText },
+                [CellType.PileOfStones] = new List<Action<Sprite, InventoryItems[]>> { UseItem },
+                [CellType.HeapWithRelic] = new List<Action<Sprite, InventoryItems[]>> { UseItem },
+                [CellType.Password] = new List<Action<Sprite, InventoryItems[]>> { FindItem },
+                [CellType.ClosedChest] = new List<Action<Sprite, InventoryItems[]>> { PrintText, UseItem },
+                [CellType.Pedestal] = new List<Action<Sprite, InventoryItems[]>> { UseItem },
+                [CellType.EnchantedExit] = new List<Action<Sprite, InventoryItems[]>> { PrintText, UseItem }
             };
             CellState = cellState;
             DressedDummyTexture = dressedDummyTexture;
@@ -78,7 +78,7 @@ namespace MysteryOfTheDungeon
         }
 
 
-        public void MakeInteraction(SpriteMap interactionCell, InventoryItems[] inventory)
+        public void MakeInteraction(Sprite interactionCell, InventoryItems[] inventory)
         {
             if (InteractionDictionary.ContainsKey(interactionCell.Value))
             {
@@ -87,7 +87,7 @@ namespace MysteryOfTheDungeon
             }
         }
 
-        public void FindItem(SpriteMap interactionCell, InventoryItems[] inventory)
+        public void FindItem(Sprite interactionCell, InventoryItems[] inventory)
         {
             var interactionSubject = interactionCell.Value;
             switch (interactionSubject)
@@ -240,7 +240,7 @@ namespace MysteryOfTheDungeon
             }
         }
 
-        public void UseItem(SpriteMap interactionCell, InventoryItems[] inventory)
+        public void UseItem(Sprite interactionCell, InventoryItems[] inventory)
         {
             var interactionSubject = interactionCell.Value;
             var selectedСells = FindSelectedСells(CellState, inventory);
@@ -410,7 +410,7 @@ namespace MysteryOfTheDungeon
             }
         }
 
-        public void PrintText(SpriteMap interactionCell, InventoryItems[] inventory)
+        public void PrintText(Sprite interactionCell, InventoryItems[] inventory)
         {
             var interactionSubject = interactionCell.Value;
             switch (interactionSubject)

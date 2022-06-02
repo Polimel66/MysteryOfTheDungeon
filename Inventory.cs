@@ -24,7 +24,7 @@ namespace MysteryOfTheDungeon
 
     class Inventory
     {
-        private SpriteMap[,] _Inventory;
+        private Sprite[,] _Inventory;
         private Texture2D BackgroundTexture;
         private Texture2D BackgroundForTextTexture;
         private Vector2 PositionBackground = new Vector2(30 * 28, 0);
@@ -112,9 +112,9 @@ namespace MysteryOfTheDungeon
             FourthRelicOnTexture = fourthRelicOnTexture;
         }
 
-        public SpriteMap[,] GenerateInventory()
+        public Sprite[,] GenerateInventory()
         {
-            var resultInventory = new SpriteMap[3, 4];
+            var resultInventory = new Sprite[3, 4];
             var position = new Vector2(875, 470);
             Texture2D texture;
             var lineCounter = 0;
@@ -212,7 +212,7 @@ namespace MysteryOfTheDungeon
                         texture = EmptyTexture;
                         break;
                 }
-                resultInventory[lineCounter, columnCounter] = new SpriteMap(texture, position);
+                resultInventory[lineCounter, columnCounter] = new Sprite(texture, position);
                 if ((i + 1) % 4 == 0)
                 {
                     lineCounter += 1;

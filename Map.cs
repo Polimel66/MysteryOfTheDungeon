@@ -181,9 +181,9 @@ namespace MysteryOfTheDungeon
 
         #region GenerateMap
 
-        public SpriteMap[,] GenerateMap()
+        public Sprite[,] GenerateMap()
         {
-            var resultMap = new SpriteMap[28, 26];
+            var resultMap = new Sprite[28, 26];
             var position = new Vector2(0, 0);
             Texture2D texture;
             CellType cellType;
@@ -392,7 +392,7 @@ namespace MysteryOfTheDungeon
                         cellType = CellType.Sink;
                     }
 
-                    resultMap[x, y] = new SpriteMap(texture, position, cellType);
+                    resultMap[x, y] = new Sprite(texture, position, cellType);
                     position.X += MapTextureSide;
                 }
                 position.X = 0;
@@ -404,7 +404,7 @@ namespace MysteryOfTheDungeon
 
         #endregion
 
-        public void Draw(SpriteBatch spriteBatch, SpriteMap[,] map)
+        public void Draw(SpriteBatch spriteBatch, Sprite[,] map)
         {
             foreach(var mapCell in map)
             {
